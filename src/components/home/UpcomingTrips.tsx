@@ -126,15 +126,17 @@ export default function UpcomingTrips() {
               this is absolutely positioned in is edge-to-edge with the white
               card at this breakpoint, since the card is w-full with no
               horizontal offset from it, so right-8/top-8 here reads as
-              32px from the card's own edges). w-36 + aspect-[4/5] keeps the
-              thumbnail portrait-shaped — the auto height is just width * 5/4.
+              32px from the card's own edges). w-24 (was w-36 — shrunk per
+              explicit feedback that it was covering the "Upcoming trips."
+              title text underneath it) + aspect-[4/5] keeps the thumbnail
+              portrait-shaped — the auto height is just width * 5/4.
               Desktop: becomes the separate right-hand photo card via the
               md: overrides (md:aspect-auto cancels the mobile aspect ratio
               so md:min-h-[300px] governs the height there, same as before). */}
           <Reveal
             repeat
             delay={120}
-            className="absolute right-8 top-8 z-10 w-36 aspect-[4/5] overflow-hidden rounded-2xl shadow-lg md:relative md:right-auto md:top-auto md:z-auto md:aspect-auto md:min-h-[300px] md:w-[calc(50%-16px)] md:shadow-none"
+            className="absolute right-8 top-8 z-10 w-24 aspect-[4/5] overflow-hidden rounded-2xl shadow-lg md:relative md:right-auto md:top-auto md:z-auto md:aspect-auto md:min-h-[300px] md:w-[calc(50%-16px)] md:shadow-none"
           >
             {upcomingTrips.map((trip, i) => (
               <div
