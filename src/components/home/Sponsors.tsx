@@ -25,7 +25,7 @@ const TOPO_TILE_SIZE = "1092px"; // 910px + 20% further, per explicit request
 const sponsors: { slug: string; name: string; logo?: string }[] = [
   { slug: "raccholabici", name: "RACC · HolaBICI", logo: "/images/raccholabici.png" },
   { slug: "overstims", name: "Overstim.s" },
-  { slug: "quetzal", name: "Quetzal" },
+  { slug: "quetzal", name: "Quetzal", logo: "/images/quetzal.png" },
 ];
 
 export default function Sponsors() {
