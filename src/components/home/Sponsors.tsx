@@ -283,11 +283,11 @@ export default function Sponsors() {
                 key={`${sponsor.slug}-${i}`}
                 delay={240 + (i % sponsors.length) * 80}
                 show={moduleVisible}
-                className="h-20 w-[220px] flex-none"
+                className="h-28 w-[260px] flex-none"
               >
                 <div
                   className={`flex h-full items-center justify-center rounded-xl bg-light text-center text-xs font-medium text-dark/60 shadow-sm ${
-                    sponsor.logo ? "p-2" : "px-4"
+                    sponsor.logo ? "p-1" : "px-4"
                   }`}
                 >
                   {sponsor.logo ? (
