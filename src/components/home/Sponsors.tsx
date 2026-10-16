@@ -285,13 +285,22 @@ export default function Sponsors() {
                 show={moduleVisible}
                 className="h-20 w-[220px] flex-none"
               >
-                <div className="flex h-full items-center justify-center rounded-xl bg-light px-4 text-center text-xs font-medium text-dark/60 shadow-sm">
+                <div
+                  className={`flex h-full items-center justify-center rounded-xl bg-light text-center text-xs font-medium text-dark/60 shadow-sm ${
+                    sponsor.logo ? "p-2" : "px-4"
+                  }`}
+                >
                   {sponsor.logo ? (
+                    // Bigger than the old max-h-12 (which left a lot of
+                    // unused card space) — h-full + object-contain fills
+                    // the card's own height right up to this thin padding,
+                    // full width available too, without ever cropping or
+                    // stretching the logo out of its own aspect ratio.
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
                       src={sponsor.logo}
                       alt={sponsor.name}
-                      className="h-full max-h-12 w-auto object-contain"
+                      className="h-full w-full object-contain"
                     />
                   ) : (
                     // TODO: replace with a real logo at /images/sponsors/<slug>.png once available
