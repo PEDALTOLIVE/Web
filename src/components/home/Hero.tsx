@@ -9,12 +9,32 @@ const TOPO_IMAGE = "/images/hero-topo.svg";
 // layer. Replaces a live CSS blur(40px) on a full-screen layer, which older
 // Macs/Safari had to re-render on every mouse move (very slow there).
 const TOPO_BLUR_IMAGE = "/images/hero-topo-blur.webp";
-const HERO_VIDEO = "/videos/hero.mp4";
-const HERO_POSTER = "/videos/hero-poster.jpg";
+// Two encodes of the same (vertical) clip, last 2s trimmed:
+// - desktop: pre-cropped to a 1080x720 horizontal band around the rider, so
+//   wide screens get every pixel at high bitrate instead of the browser
+//   blowing up a thin slice of a vertical video (which looked pixelated);
+// - mobile: the full vertical frame at 720x1280 for portrait screens.
+// Picked on mount by viewport shape (see the effect below), so each device
+// downloads only one of them.
+const HERO_VIDEOS = {
+  wide: { src: "/videos/hero-desktop.mp4", poster: "/videos/hero-poster-desktop.jpg", position: "center" },
+  tall: { src: "/videos/hero-mobile.mp4", poster: "/videos/hero-poster.jpg", position: "center 55%" },
+} as const;
+const WIDE_QUERY = "(min-aspect-ratio: 4/5)";
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
   const [active, setActive] = useState(false);
+  const [videoVariant, setVideoVariant] = useState<keyof typeof HERO_VIDEOS | null>(null);
+
+  useEffect(() => {
+    const mq = window.matchMedia(WIDE_QUERY);
+    const pick = () => setVideoVariant(mq.matches ? "wide" : "tall");
+    pick();
+    mq.addEventListener("change", pick);
+    return () => mq.removeEventListener("change", pick);
+  }, []);
+  const video = videoVariant ? HERO_VIDEOS[videoVariant] : null;
 
   // Track the cursor so the topo background can be revealed in a circular
   // spotlight around it. The mask doesn't snap straight to the pointer —
@@ -108,18 +128,23 @@ export default function Hero() {
           crops it to a band on wide screens — object-position keeps the
           rider (around the middle of the frame) in view. A dark overlay
           on top keeps the title and button readable over bright desert. */}
-      <video
-        aria-hidden
-        className="pointer-events-none absolute inset-0 h-full w-full object-cover"
-        style={{ objectPosition: "center 55%" }}
-        src={HERO_VIDEO}
-        poster={HERO_POSTER}
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="auto"
-      />
+      {video && (
+        <video
+          // key: remount (and reload) cleanly if the viewport flips between
+          // wide and tall, e.g. rotating a tablet.
+          key={video.src}
+          aria-hidden
+          className="pointer-events-none absolute inset-0 h-full w-full object-cover"
+          style={{ objectPosition: video.position }}
+          src={video.src}
+          poster={video.poster}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+        />
+      )}
       <div aria-hidden className="pointer-events-none absolute inset-0 bg-dark/55" />
 
       {/* Topographic-line background — invisible by default, revealed only
