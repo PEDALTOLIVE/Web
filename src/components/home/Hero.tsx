@@ -111,7 +111,7 @@ export default function Hero() {
       <video
         aria-hidden
         className="pointer-events-none absolute inset-0 h-full w-full object-cover"
-        style={{ objectPosition: "center 45%" }}
+        style={{ objectPosition: "center 55%" }}
         src={HERO_VIDEO}
         poster={HERO_POSTER}
         autoPlay
