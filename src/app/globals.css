@@ -1,0 +1,122 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-light text-dark antialiased;
+  }
+}
+
+/* Lenis (see SmoothScroll.tsx) drives its own eased, amplified scroll on
+   the home page — per explicit request, trying a different approach after
+   the CSS scroll-snap just before it. These are Lenis's own documented
+   setup rules, added alongside (not replacing) the plain scroll-behavior
+   above, which stays as a harmless fallback if JS never runs. The
+   !important on scroll-behavior: auto is required, not decorative — this
+   exact codebase already hit a real bug once from a JS scroll loop fighting
+   the smooth value above; Lenis's own class-toggle rule here is what stops
+   that from happening again while it's active. */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+@layer components {
+  .eyebrow {
+    @apply font-mono text-detail-m uppercase text-primary;
+  }
+
+  .btn {
+    /* duration-300 (up from Tailwind's 150ms default) so hover/active state
+       changes read as a soft dissolve instead of an instant snap — applies
+       site-wide to every button built on this class. */
+    @apply inline-flex items-center justify-center gap-3 rounded-lg px-6 py-4 font-mono text-detail-m uppercase transition-colors duration-300;
+  }
+  .btn-primary {
+    @apply btn bg-primary text-light hover:bg-primary/90;
+  }
+  .btn-outline {
+    @apply btn border border-primary bg-light/10 text-light hover:bg-light/20;
+  }
+  .btn-outline-dark {
+    @apply btn border border-dark/20 text-dark hover:bg-dark/5;
+  }
+  /* Outline in the primary color itself (distinct from .btn-outline, which
+     is white-on-primary for use over dark/colored backgrounds) — used for
+     the article detail page's "Previous" pagination button, paired with
+     .btn-primary's "Next". */
+  .btn-outline-primary {
+    @apply btn border border-primary text-primary hover:bg-primary/5;
+  }
+
+  .container-page {
+    @apply mx-auto w-full max-w-content px-6;
+  }
+}
+
+@keyframes star-twinkle {
+  0%,
+  100% {
+    opacity: var(--op-max, 0.6);
+  }
+  50% {
+    opacity: var(--op-min, 0.2);
+  }
+}
+
+/* Sponsors module: the logo strip auto-scrolls left, forever — see the
+   duplicated-list comment in Sponsors.tsx for how the loop stays seamless. */
+@keyframes sponsors-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  /* 40% slower than the original 28s (28 * 1.4 = 39.2s) — same distance,
+     more time to cover it. */
+  animation: sponsors-marquee 39.2s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+}
+
+/* Hides the fixed scroll header on mobile only, while the home page's
+   Globe module (AboutWorld.tsx) is in its interactive "stage 3" —
+   the floating pill would otherwise sit on top of the globe's own
+   drag/tap interaction area. Desktop is untouched (globe isn't
+   interactive there in the same cramped way). Toggled on
+   document.body by AboutWorld.tsx's existing scroll rAF loop. */
+@media (max-width: 767px) {
+  body.hide-header-globe-stage3 #site-header {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+}
