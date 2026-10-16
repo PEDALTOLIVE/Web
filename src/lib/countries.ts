@@ -181,16 +181,19 @@ export type UpcomingTrip = {
 };
 
 // Countries on the horizon — shown in the "Upcoming trips" module between
-// the interactive globe and the guided trips grid. Swap `image` for a real
-// local photo (`/images/upcoming/<slug>.jpg`) once you have one per country.
+// the interactive globe and the guided trips grid. Real photos live in
+// `public/images/` (same flat folder as the rest of the site's images).
+// NOTE: Pakistan still has no photo uploaded to the repo yet — using the
+// placeholder until one lands in public/images/ (swap the `image` value
+// below for its real filename once it's there).
 export const upcomingTrips: UpcomingTrip[] = [
   { slug: "pakistan", name: "Pakistan", image: placeholderImage("upcoming-pakistan", 1200, 1500) },
-  { slug: "afghanistan", name: "Afghanistan", image: placeholderImage("upcoming-afghanistan", 1200, 1500) },
-  { slug: "mexico", name: "Mexico", image: placeholderImage("upcoming-mexico", 1200, 1500) },
-  { slug: "western-sahara", name: "Western Sahara", image: placeholderImage("upcoming-western-sahara", 1200, 1500) },
-  { slug: "mauritania", name: "Mauritania", image: placeholderImage("upcoming-mauritania", 1200, 1500) },
-  { slug: "ethiopia", name: "Ethiopia", image: placeholderImage("upcoming-ethiopia", 1200, 1500) },
-  { slug: "balkans", name: "Balkans", image: placeholderImage("upcoming-balkans", 1200, 1500) },
+  { slug: "afghanistan", name: "Afghanistan", image: "/images/IMG_9486.JPG" },
+  { slug: "mexico", name: "Mexico", image: "/images/IMG_9487.JPG" },
+  { slug: "western-sahara", name: "Western Sahara", image: "/images/IMG_9488.JPG" },
+  { slug: "mauritania", name: "Mauritania", image: "/images/IMG_9489.JPG" },
+  { slug: "ethiopia", name: "Ethiopia", image: "/images/IMG_9490.JPG" },
+  { slug: "balkans", name: "Balkans", image: "/images/IMG_9491.WEBP" },
 ];
 
 export type KitIncludedIconKey = "route" | "guide" | "photos" | "logistics";
