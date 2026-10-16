@@ -1,9 +1,9 @@
 "use client";
 
-import { Suspense, useEffect, useMemo, useRef } from "react";
+import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import type { RefObject } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { Html, Stars, useTexture } from "@react-three/drei";
+import { Html, Preload, Stars, useTexture } from "@react-three/drei";
 import * as THREE from "three";
 import { countries, type CountryTrip } from "@/lib/countries";
 
@@ -63,6 +63,25 @@ const CAMERA_Z_FULL = 3.24;
 
 // Real-world lat/lon from lib/countries.ts, flattened onto each point so
 // the rest of this file can keep reading `country.lat` / `country.lon`.
+// Earth textures. Declared once so the same list drives both the module-level
+// preload just below and the useTexture() call inside Scene. clouds is a
+// grayscale JPG (was a 1.4MB PNG) — an alphaMap only reads one channel, so
+// nothing is lost, and it downloads in well under half the time.
+const TEXTURE_URLS = [
+  "/textures/earth/albedo.jpg",
+  "/textures/earth/bump.jpg",
+  "/textures/earth/roughness.jpg",
+  "/textures/earth/night-lights.jpg",
+  "/textures/earth/clouds.jpg",
+];
+
+// Start downloading the textures the moment this module is loaded (which
+// AboutWorld now triggers right after page load, while the hero is still on
+// screen) instead of only when the globe first renders mid-entrance — that
+// late, all-at-once download + GPU upload was a big part of the stuttery
+// first appearance.
+useTexture.preload(TEXTURE_URLS);
+
 const POINTS = countries.map((c) => ({
   ...c,
   lat: c.coords.lat,
@@ -236,13 +255,7 @@ function Scene({
   const { camera } = useThree();
   const glowTexture = useGlowTexture();
 
-  const [albedo, bump, roughness, nightLights, clouds] = useTexture([
-    "/textures/earth/albedo.jpg",
-    "/textures/earth/bump.jpg",
-    "/textures/earth/roughness.jpg",
-    "/textures/earth/night-lights.jpg",
-    "/textures/earth/clouds.png",
-  ]);
+  const [albedo, bump, roughness, nightLights, clouds] = useTexture(TEXTURE_URLS);
 
   albedo.colorSpace = THREE.SRGBColorSpace;
   nightLights.colorSpace = THREE.SRGBColorSpace;
@@ -359,6 +372,24 @@ function Scene({
 // feel as the old CSS version). Markers are placed with real
 // lat/lon-on-sphere projection and rendered as HTML overlays, with
 // hand-rolled front/back occlusion (see Marker above).
+// Rendered inside the same <Suspense> as Scene, so its effect only fires once
+// every texture has loaded and <Preload all /> has uploaded them / compiled
+// the shaders. Two animation frames later (so the first real frame has been
+// drawn) it tells the wrapper to fade the canvas in.
+function ReadySignal({ onReady }: { onReady: () => void }) {
+  useEffect(() => {
+    let id2 = 0;
+    const id1 = requestAnimationFrame(() => {
+      id2 = requestAnimationFrame(onReady);
+    });
+    return () => {
+      cancelAnimationFrame(id1);
+      cancelAnimationFrame(id2);
+    };
+  }, [onReady]);
+  return null;
+}
+
 export default function Globe({ interactive, onSelect, onDraggingChange, onPointHoverChange, zoomRef, active = true }: GlobeProps) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const rotationState = useRef<RotationState>({ rotation: START_ROTATION, tilt: 0, dragging: false, hovering: false });
@@ -366,6 +397,11 @@ export default function Globe({ interactive, onSelect, onDraggingChange, onPoint
   const lastYRef = useRef(0);
   const interactiveRef = useRef(interactive);
   interactiveRef.current = interactive;
+  // Canvas stays invisible until textures + shaders are fully ready, then
+  // fades in — so the first thing anyone sees is a finished globe, never a
+  // half-loaded one popping in mid-animation.
+  const [ready, setReady] = useState(false);
+  const handleReady = useMemo(() => () => setReady(true), []);
 
   useEffect(() => {
     const el = wrapRef.current;
@@ -453,6 +489,18 @@ export default function Globe({ interactive, onSelect, onDraggingChange, onPoint
         // globe, especially over lighter/land textures where the cut is
         // obvious against the dark page background).
         camera={{ position: [0, 0, CAMERA_Z_REST], fov: 40 }}
+        // Main fix for the choppy first appearance: AboutWorld scales the
+        // globe's parent in from scale(0) with a CSS transform during the
+        // entrance. R3F measures its container with getBoundingClientRect
+        // (transform included) and re-measures on every scroll, so all the
+        // way through that entrance it kept resizing the WebGL canvas —
+        // reallocating (and clearing) the framebuffer every ~50ms while it
+        // grew, starting from 0x0. offsetSize makes it measure the real,
+        // un-transformed layout size instead (constant, so the canvas is
+        // sized once and the CSS scale just scales the finished image), and
+        // scroll: false stops the pointless re-measure on every scroll.
+        resize={{ scroll: false, offsetSize: true }}
+        style={{ opacity: ready ? 1 : 0, transition: "opacity 0.6s ease-out" }}
         dpr={[1, 2]}
         gl={{ alpha: true, antialias: true }}
         // "always" (r3f's default) keeps this rendering every frame for as
@@ -475,6 +523,11 @@ export default function Globe({ interactive, onSelect, onDraggingChange, onPoint
             zoomRef={zoomRef}
             wrapRef={wrapRef}
           />
+          {/* Uploads every texture to the GPU and compiles every shader up
+              front, in one go, instead of lazily on the first frames the
+              globe is on screen (which is exactly when it's animating in). */}
+          <Preload all />
+          <ReadySignal onReady={handleReady} />
         </Suspense>
       </Canvas>
     </div>

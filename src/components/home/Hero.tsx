@@ -5,6 +5,8 @@ import Reveal from "@/components/ui/Reveal";
 import RevealLines from "@/components/ui/RevealLines";
 
 const TOPO_IMAGE = "/images/hero-topo.svg";
+const HERO_VIDEO = "/videos/hero.mp4";
+const HERO_POSTER = "/videos/hero-poster.jpg";
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -95,6 +97,27 @@ export default function Hero() {
       // user can actually see, toolbar or no toolbar. Per explicit request.
       className="relative flex h-dvh min-h-[600px] flex-col overflow-hidden bg-dark text-light"
     >
+      {/* Background video — bottom-most layer, underneath the hero-topo
+          spotlight below (per explicit request). Muted + playsInline so
+          mobile browsers allow autoplay; the poster shows instantly while
+          the clip buffers. The source clip is vertical, so object-cover
+          crops it to a band on wide screens — object-position keeps the
+          rider (around the middle of the frame) in view. A dark overlay
+          on top keeps the title and button readable over bright desert. */}
+      <video
+        aria-hidden
+        className="pointer-events-none absolute inset-0 h-full w-full object-cover"
+        style={{ objectPosition: "center 45%" }}
+        src={HERO_VIDEO}
+        poster={HERO_POSTER}
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+      />
+      <div aria-hidden className="pointer-events-none absolute inset-0 bg-dark/55" />
+
       {/* Topographic-line background — invisible by default, revealed only
           inside a soft circular spotlight that follows the cursor. Two
           stacked copies of the same image, each masked with a radial
