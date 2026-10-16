@@ -183,11 +183,8 @@ export type UpcomingTrip = {
 // Countries on the horizon — shown in the "Upcoming trips" module between
 // the interactive globe and the guided trips grid. Real photos live in
 // `public/images/` (same flat folder as the rest of the site's images).
-// NOTE: Pakistan still has no photo uploaded to the repo yet — using the
-// placeholder until one lands in public/images/ (swap the `image` value
-// below for its real filename once it's there).
 export const upcomingTrips: UpcomingTrip[] = [
-  { slug: "pakistan", name: "Pakistan", image: placeholderImage("upcoming-pakistan", 1200, 1500) },
+  { slug: "pakistan", name: "Pakistan", image: "/images/upcoming-pakistan.jpg" },
   { slug: "afghanistan", name: "Afghanistan", image: "/images/IMG_9486.JPG" },
   { slug: "mexico", name: "Mexico", image: "/images/IMG_9487.JPG" },
   { slug: "western-sahara", name: "Western Sahara", image: "/images/IMG_9488.JPG" },
