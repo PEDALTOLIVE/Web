@@ -260,6 +260,22 @@ export default function AboutWorld() {
         // identical on purpose (see note above this block in the diff)
         // so the globe fades AND grows as one smooth, synchronized motion
         // instead of two curves racing each other.
+        //
+        // Bug fix (explicit report: the grow read as an abrupt pop-in
+        // rather than a smooth 0->100 scale): this whole entrance is
+        // driven directly off scroll position, recomputed per scroll
+        // event/rAF tick. On a slow, continuous scroll that's plenty of
+        // frames to look smooth — but on a single fast flick (a trackpad
+        // swipe, or Page Down), `entrance` can jump from ~0 straight to 1
+        // between one tick and the next, so the globe had nothing to
+        // animate: it just snapped from invisible to full size in that
+        // one frame. The CSS transition below (see the style prop on this
+        // element) is what actually fixes it — it makes the browser
+        // interpolate opacity/transform over 300ms no matter how big a
+        // jump the JS value makes in one tick, so even a fast flick now
+        // reads as a quick but continuous grow instead of a pop. A slow
+        // scroll still tracks the finger/wheel closely since 300ms is
+        // short relative to a deliberate scroll gesture.
         const globeEase = smootherstep(0, 1, entrance);
         globeSizeRef.current.style.opacity = String(globeEase);
         globeSizeRef.current.style.transform = `scale(${globeEase}) translateY(${(1 - globeEase) * 22}px)`;
@@ -447,6 +463,11 @@ export default function AboutWorld() {
             // margin where the whole sphere always stays inside the frame
             // on its own, so nothing needs cropping.
             className="relative z-0 w-[374px] will-change-transform sm:w-[390px] md:w-[468px] lg:w-[546px]"
+            // Smooths out the entrance (opacity + scale, set imperatively
+            // above in `update()`) so a fast scroll still interpolates
+            // instead of snapping straight to the target value — see the
+            // comment above the globeEase block for why this was needed.
+            style={{ transition: "opacity 300ms ease-out, transform 300ms ease-out" }}
           >
             <Globe
               interactive={interactive}
