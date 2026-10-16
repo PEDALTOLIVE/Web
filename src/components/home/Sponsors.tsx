@@ -18,7 +18,16 @@ const TOPO_BLUR_IMAGE = "/images/hover-topo2-blur.webp";
 // with no gaps, per explicit request.
 const TOPO_TILE_SIZE = "1092px"; // 910px + 20% further, per explicit request
 
-const sponsors = ["RACC Mobility Club", "HolaBICI", "Overstim.s", "Carboxtrem", "Quetzal"];
+// Each sponsor is either plain text (no logo yet) or has a `logo` pointing
+// at a real image in public/images/ (same flat folder as the rest of the
+// site's images) — RACC + HolaBICI share one combined mark, so they're a
+// single entry here rather than two.
+const sponsors: { slug: string; name: string; logo?: string }[] = [
+  { slug: "raccholabici", name: "RACC · HolaBICI", logo: "/images/raccholabici.png" },
+  { slug: "overstims", name: "Overstim.s" },
+  { slug: "carboxtrem", name: "Carboxtrem" },
+  { slug: "quetzal", name: "Quetzal" },
+];
 
 export default function Sponsors() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -270,16 +279,25 @@ export default function Sponsors() {
                 original set (i % sponsors.length) instead of accumulating
                 across every duplicate, which would otherwise stretch the
                 entrance out over many extra seconds on wide screens. */}
-            {loop.map((name, i) => (
+            {loop.map((sponsor, i) => (
               <Reveal
-                key={`${name}-${i}`}
+                key={`${sponsor.slug}-${i}`}
                 delay={240 + (i % sponsors.length) * 80}
                 show={moduleVisible}
                 className="h-20 w-[220px] flex-none"
               >
                 <div className="flex h-full items-center justify-center rounded-xl bg-light px-4 text-center text-xs font-medium text-dark/60 shadow-sm">
-                  {/* TODO: replace with real logo at /images/sponsors/<slug>.svg */}
-                  {name}
+                  {sponsor.logo ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={sponsor.logo}
+                      alt={sponsor.name}
+                      className="h-full max-h-12 w-auto object-contain"
+                    />
+                  ) : (
+                    // TODO: replace with a real logo at /images/sponsors/<slug>.png once available
+                    sponsor.name
+                  )}
                 </div>
               </Reveal>
             ))}
