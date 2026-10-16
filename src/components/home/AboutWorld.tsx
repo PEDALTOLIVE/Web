@@ -38,15 +38,6 @@ function smootherstep(edge0: number, edge1: number, x: number) {
   return t * t * t * (t * (t * 6 - 15) + 10);
 }
 
-// Cubic ease-out: fast start, gentle settle at the end. Used for the
-// globe's own entrance (stage 1) so it scales up from 0 with the same
-// "decelerating" feel most UI motion uses, rather than linearly tracking
-// scroll progress.
-function easeOutCubic(x: number) {
-  const t = Math.max(0, Math.min(1, x));
-  return 1 - Math.pow(1 - t, 3);
-}
-
 // Same fade-up language as the Hero's <Reveal>: opacity plus a small lift,
 // just driven by scroll progress instead of an IntersectionObserver.
 function applyFade(el: HTMLElement | null, opacity: number, distance = 22) {
@@ -265,14 +256,13 @@ export default function AboutWorld() {
       applyFade(stage2Ref.current, stage2, 16);
       applyFade(stage3Ref.current, stage3);
       if (globeSizeRef.current) {
-        // The globe now scales in from 0 to its full size (not just
-        // fading/lifting) as it enters, on an ease-out curve so it starts
-        // fast and settles gently into place rather than tracking scroll
-        // progress linearly — synced to the same `entrance` timeline that
-        // drives the stage-1 headline text, so the two appear together.
-        const globeScale = easeOutCubic(entrance);
-        globeSizeRef.current.style.opacity = String(entrance);
-        globeSizeRef.current.style.transform = `scale(${globeScale}) translateY(${(1 - entrance) * 22}px)`;
+        // Opacity and scale both ride this single eased value — kept
+        // identical on purpose (see note above this block in the diff)
+        // so the globe fades AND grows as one smooth, synchronized motion
+        // instead of two curves racing each other.
+        const globeEase = smootherstep(0, 1, entrance);
+        globeSizeRef.current.style.opacity = String(globeEase);
+        globeSizeRef.current.style.transform = `scale(${globeEase}) translateY(${(1 - globeEase) * 22}px)`;
       }
       // The globe's own container no longer changes CSS size at all — it
       // used to grow via a --gscale custom property, but resizing a WebGL
@@ -456,7 +446,7 @@ export default function AboutWorld() {
             // distance at full zoom is deliberately kept inside the safe
             // margin where the whole sphere always stays inside the frame
             // on its own, so nothing needs cropping.
-            className="relative z-0 w-[374px] sm:w-[390px] md:w-[468px] lg:w-[546px]"
+            className="relative z-0 w-[374px] will-change-transform sm:w-[390px] md:w-[468px] lg:w-[546px]"
           >
             <Globe
               interactive={interactive}
