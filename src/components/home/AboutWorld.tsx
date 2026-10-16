@@ -172,7 +172,13 @@ export default function AboutWorld() {
       // A generous margin (half a viewport height on each side) so the
       // globe is already rendering again well before it's actually back
       // on screen, rather than popping in a frame late right at the edge.
-      const shouldCanvasBeActive = rect.bottom > -vh * 0.5 && rect.top < vh * 1.5;
+      // Upper bound tightened from vh * 1.5 to vh: the globe is invisible
+      // (scale 0 / opacity 0) until the section is ~0.6vh from the top of
+      // the screen anyway, so rendering it while the hero is still on screen
+      // was pure wasted GPU work competing with the hero video and topo
+      // effect — very noticeable on older Macs. vh still leaves a 0.4vh
+      // head start before the entrance animation begins.
+      const shouldCanvasBeActive = rect.bottom > -vh * 0.5 && rect.top < vh;
       if (shouldCanvasBeActive !== canvasActiveRef.current) {
         canvasActiveRef.current = shouldCanvasBeActive;
         setCanvasActive(shouldCanvasBeActive);

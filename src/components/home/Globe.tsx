@@ -3,7 +3,7 @@
 import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import type { RefObject } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { Html, Preload, Stars, useTexture } from "@react-three/drei";
+import { Html, PerformanceMonitor, Preload, Stars, useTexture } from "@react-three/drei";
 import * as THREE from "three";
 import { countries, type CountryTrip } from "@/lib/countries";
 
@@ -67,8 +67,23 @@ const CAMERA_Z_FULL = 3.24;
 // preload just below and the useTexture() call inside Scene. clouds is a
 // grayscale JPG (was a 1.4MB PNG) — an alphaMap only reads one channel, so
 // nothing is lost, and it downloads in well under half the time.
+// "Lite" mode for modest machines (e.g. an older MacBook): detected once,
+// up front, from the CPU core count (and RAM where the browser reports it —
+// Safari doesn't). In lite mode the globe uses a 2K instead of 4K Earth
+// texture (~4x less GPU memory/upload), fewer sphere segments and stars,
+// no antialiasing, and renders at 1x pixel density. It looks almost the
+// same at the globe's on-screen size but is far cheaper to draw. Machines
+// that pass this check but still struggle are caught at runtime by the
+// <PerformanceMonitor> further down, which drops the pixel density.
+const LITE =
+  typeof navigator !== "undefined" &&
+  ((navigator.hardwareConcurrency ?? 8) <= 4 ||
+    ((navigator as Navigator & { deviceMemory?: number }).deviceMemory ?? 8) <= 4);
+const SPHERE_SEGMENTS = LITE ? 64 : 96;
+const STAR_COUNT = LITE ? 1200 : 3200;
+
 const TEXTURE_URLS = [
-  "/textures/earth/albedo.jpg",
+  LITE ? "/textures/earth/albedo-2k.jpg" : "/textures/earth/albedo.jpg",
   "/textures/earth/bump.jpg",
   "/textures/earth/roughness.jpg",
   "/textures/earth/night-lights.jpg",
@@ -260,7 +275,7 @@ function Scene({
   albedo.colorSpace = THREE.SRGBColorSpace;
   nightLights.colorSpace = THREE.SRGBColorSpace;
   [albedo, bump, roughness, nightLights, clouds].forEach((t) => {
-    t.anisotropy = 8;
+    t.anisotropy = LITE ? 4 : 8;
   });
 
   useFrame((_, delta) => {
@@ -304,7 +319,7 @@ function Scene({
           ~3.2), so it stays essentially fixed in apparent size through the
           whole zoom range instead of dollying with the globe, exactly like
           a real background would. */}
-      <Stars radius={60} depth={35} count={3200} factor={2.4} saturation={0} fade speed={0.25} />
+      <Stars radius={60} depth={35} count={STAR_COUNT} factor={2.4} saturation={0} fade speed={0.25} />
 
       {/* Soft halo — see the comment on useGlowTexture above. Drawn before
           the globe (negative renderOrder) so the opaque sphere painted
@@ -321,7 +336,7 @@ function Scene({
 
       <group ref={groupRef}>
         <mesh>
-          <sphereGeometry args={[RADIUS, 96, 96]} />
+          <sphereGeometry args={[RADIUS, SPHERE_SEGMENTS, SPHERE_SEGMENTS]} />
           <meshStandardMaterial
             map={albedo}
             bumpMap={bump}
@@ -336,7 +351,7 @@ function Scene({
 
         <group ref={cloudsRef}>
           <mesh scale={1.008}>
-            <sphereGeometry args={[RADIUS, 96, 96]} />
+            <sphereGeometry args={[RADIUS, SPHERE_SEGMENTS, SPHERE_SEGMENTS]} />
             <meshStandardMaterial
               alphaMap={clouds}
               color="#ffffff"
@@ -401,6 +416,11 @@ export default function Globe({ interactive, onSelect, onDraggingChange, onPoint
   // fades in — so the first thing anyone sees is a finished globe, never a
   // half-loaded one popping in mid-animation.
   const [ready, setReady] = useState(false);
+  // Pixel density: 1x in lite mode, up to 2x (retina) otherwise — lowered
+  // to 1x at runtime if the frame rate drops (see <PerformanceMonitor>).
+  const [dpr, setDpr] = useState<number>(() =>
+    LITE ? 1 : Math.min(2, typeof window !== "undefined" ? window.devicePixelRatio || 1 : 1),
+  );
   const handleReady = useMemo(() => () => setReady(true), []);
 
   useEffect(() => {
@@ -501,8 +521,8 @@ export default function Globe({ interactive, onSelect, onDraggingChange, onPoint
         // scroll: false stops the pointless re-measure on every scroll.
         resize={{ scroll: false, offsetSize: true }}
         style={{ opacity: ready ? 1 : 0, transition: "opacity 0.6s ease-out" }}
-        dpr={[1, 2]}
-        gl={{ alpha: true, antialias: true }}
+        dpr={dpr}
+        gl={{ alpha: true, antialias: !LITE, powerPreference: "high-performance" }}
         // "always" (r3f's default) keeps this rendering every frame for as
         // long as the Canvas is mounted, whether or not anyone can
         // actually see it. This component stays mounted for the whole
@@ -527,6 +547,9 @@ export default function Globe({ interactive, onSelect, onDraggingChange, onPoint
               front, in one go, instead of lazily on the first frames the
               globe is on screen (which is exactly when it's animating in). */}
           <Preload all />
+          {/* If the frame rate keeps falling short, render at 1x pixel
+              density from then on (a one-off switch, not a back-and-forth). */}
+          <PerformanceMonitor onDecline={() => setDpr(1)} />
           <ReadySignal onReady={handleReady} />
         </Suspense>
       </Canvas>

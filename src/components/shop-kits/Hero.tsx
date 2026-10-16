@@ -6,6 +6,10 @@ import RevealLines from "@/components/ui/RevealLines";
 import { placeholderImage } from "@/lib/placeholder";
 
 const TOPO_IMAGE = "/images/hover-topo2.svg";
+// Pre-blurred raster of the same pattern for the spotlight's soft "halo"
+// layer. Replaces a live CSS blur(40px) on a full-screen layer, which older
+// Macs/Safari had to re-render on every mouse move (very slow there).
+const TOPO_BLUR_IMAGE = "/images/hover-topo2-blur.webp";
 
 // Fixed tile size for the topo background — repeated (not scaled to
 // cover) so a single consistent pattern density tiles across the whole
@@ -108,9 +112,9 @@ export default function Hero() {
         }`}
       >
         <div
-          className="absolute inset-0 bg-center opacity-70 blur-2xl"
+          className="absolute inset-0 bg-center opacity-70"
           style={{
-            backgroundImage: `url(${TOPO_IMAGE})`,
+            backgroundImage: `url(${TOPO_BLUR_IMAGE})`,
             backgroundRepeat: "repeat",
             backgroundSize: TOPO_TILE_SIZE,
             WebkitMaskImage:

@@ -13,6 +13,10 @@ import { useSectionVisible } from "@/hooks/useSectionVisible";
 // the Hero's exact background treatment: a single non-repeating image
 // (bg-cover, like Hero.tsx) rather than a repeated tile.
 const TOPO_IMAGE = "/images/hero-topo.svg";
+// Pre-blurred raster of the same pattern for the spotlight's soft "halo"
+// layer. Replaces a live CSS blur(40px) on a full-screen layer, which older
+// Macs/Safari had to re-render on every mouse move (very slow there).
+const TOPO_BLUR_IMAGE = "/images/hero-topo-blur.webp";
 
 export default function GuidedTrips() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -236,9 +240,9 @@ export default function GuidedTrips() {
         style={{ transform: "translateY(var(--py, 0px))" }}
       >
         <div
-          className="absolute inset-0 bg-cover bg-center opacity-70 blur-2xl"
+          className="absolute inset-0 bg-cover bg-center opacity-70"
           style={{
-            backgroundImage: `url(${TOPO_IMAGE})`,
+            backgroundImage: `url(${TOPO_BLUR_IMAGE})`,
             WebkitMaskImage:
               "radial-gradient(circle 320px at var(--mx, 50%) var(--my, 50%), black 0%, black 40%, transparent 100%)",
             maskImage:
