@@ -9,16 +9,16 @@ const TOPO_IMAGE = "/images/hero-topo.svg";
 // layer. Replaces a live CSS blur(40px) on a full-screen layer, which older
 // Macs/Safari had to re-render on every mouse move (very slow there).
 const TOPO_BLUR_IMAGE = "/images/hero-topo-blur.webp";
-// Two encodes of the same (vertical) clip, last 2s trimmed:
-// - desktop: pre-cropped to a 1080x720 horizontal band around the rider, so
-//   wide screens get every pixel at high bitrate instead of the browser
-//   blowing up a thin slice of a vertical video (which looked pixelated);
-// - mobile: the full vertical frame at 720x1280 for portrait screens.
+// Two encodes of the same clip (DJI drone shot, top-down over the beach):
+// - desktop: the full 1920x1080 horizontal frame;
+// - mobile: a 608x1080 vertical crop from the centre of that frame (where
+//   the rider and bike are), at native resolution, so phones neither
+//   download pixels they'd crop away nor get an upscaled slice.
 // Picked on mount by viewport shape (see the effect below), so each device
 // downloads only one of them.
 const HERO_VIDEOS = {
   wide: { src: "/videos/hero-desktop.mp4", poster: "/videos/hero-poster-desktop.jpg", position: "center" },
-  tall: { src: "/videos/hero-mobile.mp4", poster: "/videos/hero-poster.jpg", position: "center 55%" },
+  tall: { src: "/videos/hero-mobile.mp4", poster: "/videos/hero-poster.jpg", position: "center" },
 } as const;
 const WIDE_QUERY = "(min-aspect-ratio: 4/5)";
 
