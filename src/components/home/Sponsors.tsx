@@ -21,12 +21,23 @@ const TOPO_TILE_SIZE = "1092px"; // 910px + 20% further, per explicit request
 // Each sponsor is either plain text (no logo yet) or has a `logo` pointing
 // at a real image in public/images/ (same flat folder as the rest of the
 // site's images) — RACC + HolaBICI share one combined mark, so they're a
-// single entry here rather than two.
-const sponsors: { slug: string; name: string; logo?: string }[] = [
-  { slug: "raccholabici", name: "RACC · HolaBICI", logo: "/images/raccholabici.png" },
+// single entry here rather than two. `cardSize` picks the card's own
+// dimensions (see CARD_SIZES below) — defaults to "lg" when omitted;
+// RACC · HolaBICI is pinned back to "sm" (the size it was at before the
+// cards were enlarged) per explicit request, while Quetzal keeps the
+// larger size.
+const sponsors: { slug: string; name: string; logo?: string; cardSize?: "sm" | "lg" }[] = [
+  { slug: "raccholabici", name: "RACC · HolaBICI", logo: "/images/raccholabici.png", cardSize: "sm" },
   { slug: "overstims", name: "Overstim.s" },
   { slug: "quetzal", name: "Quetzal", logo: "/images/quetzal.png" },
 ];
+
+// "sm" is the original card size (before the enlarge-the-logos request);
+// "lg" is the enlarged one used by default now.
+const CARD_SIZES = {
+  sm: { reveal: "h-20 w-[220px]", pad: "p-2" },
+  lg: { reveal: "h-28 w-[260px]", pad: "p-1" },
+} as const;
 
 export default function Sponsors() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -265,7 +276,7 @@ export default function Sponsors() {
               visibly faster on wide screens. */}
           <div
             ref={trackRef}
-            className="marquee-track flex w-max gap-4 hover:[animation-play-state:paused]"
+            className="marquee-track flex w-max items-center gap-4 hover:[animation-play-state:paused]"
             style={{ animationDuration: `${39.2 * repeatCount}s` }}
           >
             {/* Same staggered fade-up-on-entrance as the product/kit cards
@@ -278,16 +289,18 @@ export default function Sponsors() {
                 original set (i % sponsors.length) instead of accumulating
                 across every duplicate, which would otherwise stretch the
                 entrance out over many extra seconds on wide screens. */}
-            {loop.map((sponsor, i) => (
+            {loop.map((sponsor, i) => {
+              const size = CARD_SIZES[sponsor.cardSize ?? "lg"];
+              return (
               <Reveal
                 key={`${sponsor.slug}-${i}`}
                 delay={240 + (i % sponsors.length) * 80}
                 show={moduleVisible}
-                className="h-28 w-[260px] flex-none"
+                className={`${size.reveal} flex-none`}
               >
                 <div
                   className={`flex h-full items-center justify-center rounded-xl bg-light text-center text-xs font-medium text-dark/60 shadow-sm ${
-                    sponsor.logo ? "p-1" : "px-4"
+                    sponsor.logo ? size.pad : "px-4"
                   }`}
                 >
                   {sponsor.logo ? (
@@ -308,7 +321,8 @@ export default function Sponsors() {
                   )}
                 </div>
               </Reveal>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>
