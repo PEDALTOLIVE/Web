@@ -352,7 +352,10 @@ export default function AboutWorld() {
         setInteractive(shouldInteract);
         if (!shouldInteract && tooltipRef.current) tooltipRef.current.style.opacity = "0";
       }
-      if (stage3 < 0.4) {
+      // Also close once the section starts scrolling away past its end
+      // (pRaw > 1): the sticky stage — and the card's close button at its
+      // top — would otherwise slide up out of the viewport.
+      if (stage3 < 0.4 || pRaw > 1.02) {
         setActive((prev) => (prev ? null : prev));
       }
 
@@ -625,7 +628,9 @@ export default function AboutWorld() {
         >
           {displayActive && (
             <>
-              <div className="flex items-start justify-between px-5 pt-5">
+              {/* Sticky header row so the close button stays reachable
+                  while the card's content is scrolled. */}
+              <div className="sticky top-0 z-10 flex items-start justify-between bg-light px-5 pb-2 pt-5">
                 <p className="eyebrow">{displayActive.date || displayActive.name}</p>
                 {/* Box back up to 44px (h-11/w-11) with an 8px corner radius
                     (rounded-lg, not rounded-xl's 12px) — and the ✕ is now a
@@ -651,7 +656,7 @@ export default function AboutWorld() {
                   </svg>
                 </button>
               </div>
-              <div className="px-5 pt-3">
+              <div className="px-5 pt-1">
                 <h3 className="font-serif text-h3 leading-tight">{displayActive.title}</h3>
               </div>
               {/* Placeholder photo — replace at public{active.image} once you add real trip photos */}
