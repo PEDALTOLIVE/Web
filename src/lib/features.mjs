@@ -10,11 +10,11 @@
 
 /** Guided trips: /shop-trips, trip product pages, the home "Guided trips"
  *  module and every "Book your trip" button. */
-export const SHOW_GUIDED_TRIPS = false;
+export const SHOW_GUIDED_TRIPS = true;
 
 /** Trip kits: /shop-kits, kit product + checkout pages and the home
  *  "Route kits" module. */
-export const SHOW_KITS = false;
+export const SHOW_KITS = true;
 
 /** News: /news and every article page. */
-export const SHOW_NEWS = false;
+export const SHOW_NEWS = true;
