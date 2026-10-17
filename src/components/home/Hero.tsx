@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Reveal from "@/components/ui/Reveal";
 import RevealLines from "@/components/ui/RevealLines";
+import { SHOW_GUIDED_TRIPS } from "@/lib/features.mjs";
 
 const TOPO_IMAGE = "/images/hero-topo.svg";
 // Pre-blurred raster of the same pattern for the spotlight's soft "halo"
@@ -247,7 +248,8 @@ export default function Hero() {
               instead, which both reads as an obvious, clearly-interactive
               state change and (being fully opaque) blocks the topo lines
               completely too. */}
-          <a
+          {SHOW_GUIDED_TRIPS && (
+            <a
             href="/shop-trips"
             className="btn-outline w-fit !bg-dark/60 backdrop-blur-md hover:!border-primary hover:!bg-primary hover:!text-dark"
           >
@@ -256,6 +258,7 @@ export default function Hero() {
               <path d="M4 2l4 4-4 4" />
             </svg>
           </a>
+          )}
         </Reveal>
         <Reveal immediate delay={420} className="hidden sm:block">
           <div className="flex items-center gap-2 text-detail-s text-secondary/80">

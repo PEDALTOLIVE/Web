@@ -8,6 +8,7 @@ import Shop from "@/components/home/Shop";
 import Sponsors from "@/components/home/Sponsors";
 import StickyBookCta from "@/components/home/StickyBookCta";
 import SmoothScroll from "@/components/home/SmoothScroll";
+import { SHOW_GUIDED_TRIPS, SHOW_KITS } from "@/lib/features.mjs";
 
 // The CSS scroll-snap tried just before this was removed per explicit
 // request — trying a different approach. SmoothScroll (see its own file)
@@ -23,13 +24,14 @@ export default function Home() {
       <Hero />
       <AboutWorld />
       <UpcomingTrips />
-      <GuidedTrips />
-      <RouteKits />
+      {/* Hidden/shown via src/lib/features.mjs. */}
+      {SHOW_GUIDED_TRIPS && <GuidedTrips />}
+      {SHOW_KITS && <RouteKits />}
       <Shop />
       <Sponsors />
       {/* Small "Book your trip" CTA, fixed at the bottom of the viewport
           for the whole home page — not just the hero. */}
-      <StickyBookCta />
+      {SHOW_GUIDED_TRIPS && <StickyBookCta />}
     </>
   );
 }

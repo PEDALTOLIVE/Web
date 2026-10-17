@@ -3,10 +3,13 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import Reveal from "@/components/ui/Reveal";
+import { SHOW_GUIDED_TRIPS, SHOW_KITS, SHOW_NEWS } from "@/lib/features.mjs";
 
 type Variant = "dark" | "light";
 
-const navLinks = [
+// Full nav as designed; sections switched off in src/lib/features.mjs are
+// filtered out below (and an empty "Shop" drops out entirely).
+const allNavLinks = [
   { label: "Home", href: "/" },
   {
     label: "Shop",
@@ -18,6 +21,20 @@ const navLinks = [
   { label: "News", href: "/news" },
   { label: "Contact", href: "/contact" },
 ];
+
+const hiddenHrefs = new Set<string>([
+  ...(SHOW_GUIDED_TRIPS ? [] : ["/shop-trips"]),
+  ...(SHOW_KITS ? [] : ["/shop-kits"]),
+  ...(SHOW_NEWS ? [] : ["/news"]),
+]);
+
+const navLinks = allNavLinks
+  .map((link) =>
+    link.children
+      ? { ...link, children: link.children.filter((c) => !hiddenHrefs.has(c.href)) }
+      : link
+  )
+  .filter((link) => (link.children ? link.children.length > 0 : !link.href || !hiddenHrefs.has(link.href)));
 
 // `variant` lets pages with a light background pass variant="light" so both
 // the top bar and the full-screen mobile menu switch to dark-on-light. Home's

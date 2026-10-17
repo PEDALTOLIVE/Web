@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
+import { SHOW_GUIDED_TRIPS, SHOW_KITS } from "@/lib/features.mjs";
 import Header from "@/components/layout/Header";
 import KitDetail from "@/components/product-page/Detail";
 import TripDetail from "@/components/shop-trips/Detail";
@@ -42,6 +43,7 @@ export default async function ProductPage({ params }: Props) {
   const { slug } = await params;
   const kit = kits.find((k) => k.slug === slug);
   if (kit) {
+    if (!SHOW_KITS) redirect("/");
     return (
       <>
         {/* variant="light" — same light-background treatment as shop-kits,
@@ -54,6 +56,7 @@ export default async function ProductPage({ params }: Props) {
 
   const trip = guidedTrips.find((t) => t.slug === slug);
   if (trip) {
+    if (!SHOW_GUIDED_TRIPS) redirect("/");
     return (
       <>
         {/* Default (dark) Header variant — this page follows the Guided
