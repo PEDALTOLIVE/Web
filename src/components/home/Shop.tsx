@@ -120,35 +120,59 @@ export default function Shop() {
   useEffect(() => {
     const el = scrollerRef.current;
     if (!el) return;
+    // Mouse drag-to-scroll. The pointer is only captured once the mouse has
+    // actually moved a few px — capturing on pointerdown (as before)
+    // retargeted the click to this scroller instead of the product card's
+    // <a>, so the Quetzal links stopped opening. A real drag swallows the
+    // click that follows it, so dragging never opens a product by accident.
+    const DRAG_THRESHOLD = 5;
+    let pressed = false;
     let dragging = false;
     let startX = 0;
     let startScroll = 0;
+    let pointerId = 0;
 
     const onPointerDown = (e: PointerEvent) => {
       if (e.pointerType !== "mouse") return;
-      dragging = true;
+      pressed = true;
+      dragging = false;
       startX = e.clientX;
       startScroll = el.scrollLeft;
-      el.setPointerCapture(e.pointerId);
+      pointerId = e.pointerId;
     };
     const onPointerMove = (e: PointerEvent) => {
-      if (!dragging) return;
-      el.scrollLeft = startScroll - (e.clientX - startX);
+      if (!pressed) return;
+      const dx = e.clientX - startX;
+      if (!dragging) {
+        if (Math.abs(dx) < DRAG_THRESHOLD) return;
+        dragging = true;
+        el.setPointerCapture(pointerId);
+      }
+      el.scrollLeft = startScroll - dx;
     };
     const stopDrag = (e: PointerEvent) => {
       if (e.pointerType !== "mouse") return;
-      dragging = false;
+      pressed = false;
+    };
+    const onClickCapture = (e: MouseEvent) => {
+      if (dragging) {
+        e.preventDefault();
+        e.stopPropagation();
+        dragging = false;
+      }
     };
 
     el.addEventListener("pointerdown", onPointerDown);
     el.addEventListener("pointermove", onPointerMove);
     el.addEventListener("pointerup", stopDrag);
     el.addEventListener("pointerleave", stopDrag);
+    el.addEventListener("click", onClickCapture, true);
     return () => {
       el.removeEventListener("pointerdown", onPointerDown);
       el.removeEventListener("pointermove", onPointerMove);
       el.removeEventListener("pointerup", stopDrag);
       el.removeEventListener("pointerleave", stopDrag);
+      el.removeEventListener("click", onClickCapture, true);
     };
   }, []);
 
