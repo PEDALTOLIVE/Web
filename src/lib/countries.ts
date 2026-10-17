@@ -186,11 +186,11 @@ export type UpcomingTrip = {
 export const upcomingTrips: UpcomingTrip[] = [
   { slug: "pakistan", name: "Pakistan", image: "/images/upcoming-pakistan.jpg" },
   { slug: "afghanistan", name: "Afghanistan", image: "/images/IMG_9486.JPG" },
-  { slug: "mexico", name: "Mexico", image: "/images/IMG_9487.JPG" },
-  { slug: "western-sahara", name: "Western Sahara", image: "/images/IMG_9488.JPG" },
+  { slug: "mexico", name: "Mexico", image: "/images/upcoming-mexico.jpg" },
+  { slug: "western-sahara", name: "Western Sahara", image: "/images/upcoming-western-sahara.jpg" },
   { slug: "mauritania", name: "Mauritania", image: "/images/IMG_9489.JPG" },
-  { slug: "ethiopia", name: "Ethiopia", image: "/images/IMG_9490.JPG" },
-  { slug: "balkans", name: "Balkans", image: "/images/IMG_9491.WEBP" },
+  { slug: "ethiopia", name: "Ethiopia", image: "/images/upcoming-ethiopia.jpg" },
+  { slug: "balkans", name: "Balkans", image: "/images/upcoming-balkans.jpg" },
 ];
 
 export type KitIncludedIconKey = "route" | "guide" | "photos" | "logistics";
