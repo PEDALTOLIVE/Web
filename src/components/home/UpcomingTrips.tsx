@@ -135,7 +135,7 @@ export default function UpcomingTrips() {
                   ref={(el) => {
                     nameRefs.current[i] = el;
                   }}
-                  className="text-h4 leading-tight text-dark transition-opacity duration-300"
+                  className="text-[28px] font-medium tracking-[-0.02em] leading-tight text-dark transition-opacity duration-300 md:text-h4 md:leading-tight"
                   style={{ opacity: 0.16 }}
                 >
                   {trip.name}
