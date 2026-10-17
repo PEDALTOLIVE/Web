@@ -287,11 +287,11 @@ export default function GuidedTrips() {
             as="h2"
             delay={0}
             show={moduleVisible}
-            className="max-w-[864px] font-serif text-h1 text-light"
+            className="w-full max-w-[864px] font-serif text-h1 text-light"
           >
             Guided trips the Pedaltolive way.
           </RevealLines>
-          <RevealLines as="p" delay={120} show={moduleVisible} className="mt-4 max-w-[768px] text-body-s text-light">
+          <RevealLines as="p" delay={120} show={moduleVisible} className="mt-4 w-full max-w-[768px] text-body-s text-light">
             Small-group, fully-guided bikepacking trips through the
             countries I&rsquo;ve already ridden myself: Indonesia, Thailand,
             Gambia, Colombia, Oman, Morocco, Cambodia, and more to come.
