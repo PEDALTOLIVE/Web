@@ -149,7 +149,11 @@ export default function Header({ variant = "dark" }: { variant?: Variant }) {
     // to the Reveal row below) the moment the user scrolls up again.
     <header
       id="site-header"
-      className={`fixed inset-x-0 top-0 z-50 transition-transform duration-300 ${headerText} ${
+      // pointer-events-none on the full-width fixed bar itself, re-enabled
+      // only on the real controls (nav, links, buttons): the bar's empty
+      // area used to sit invisibly on top of whatever was under it and
+      // swallow clicks — e.g. most of the globe country card's close button.
+      className={`pointer-events-none fixed inset-x-0 top-0 z-50 transition-transform duration-300 [&_a]:pointer-events-auto [&_button]:pointer-events-auto [&_nav]:pointer-events-auto ${headerText} ${
         scrollState === "down" ? "-translate-y-full" : "translate-y-0"
       }`}
     >
@@ -351,7 +355,7 @@ export default function Header({ variant = "dark" }: { variant?: Variant }) {
       <div
         aria-hidden={!mobileOpen}
         className={`fixed inset-0 z-[100] flex h-[100dvh] w-full flex-col ${overlayBg} ${overlayText} transition-opacity duration-300 md:hidden ${
-          mobileOpen ? "opacity-100" : "pointer-events-none opacity-0"
+          mobileOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
         }`}
       >
           <div className="flex h-[73px] flex-none items-center justify-between px-6">
