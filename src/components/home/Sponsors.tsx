@@ -21,23 +21,16 @@ const TOPO_TILE_SIZE = "1092px"; // 910px + 20% further, per explicit request
 // Each sponsor is either plain text (no logo yet) or has a `logo` pointing
 // at a real image in public/images/ (same flat folder as the rest of the
 // site's images) — RACC + HolaBICI share one combined mark, so they're a
-// single entry here rather than two. `cardSize` picks the card's own
-// dimensions (see CARD_SIZES below) — defaults to "lg" when omitted;
-// RACC · HolaBICI is pinned back to "sm" (the size it was at before the
-// cards were enlarged) per explicit request, while Quetzal keeps the
-// larger size.
-const sponsors: { slug: string; name: string; logo?: string; cardSize?: "sm" | "lg" }[] = [
-  { slug: "raccholabici", name: "RACC · HolaBICI", logo: "/images/raccholabici.png", cardSize: "sm" },
-  { slug: "overstims", name: "Overstim.s" },
+// single entry here rather than two. Every card renders at the same size
+// (CARD_SIZE below) — a per-sponsor size briefly existed here and was
+// removed per explicit request ("todas las cards del mismo tamaño").
+const sponsors: { slug: string; name: string; logo?: string }[] = [
+  { slug: "raccholabici", name: "RACC · HolaBICI", logo: "/images/raccholabici.png" },
+  { slug: "overstims", name: "Overstim.s", logo: "/images/overstims.png" },
   { slug: "quetzal", name: "Quetzal", logo: "/images/quetzal.png" },
 ];
 
-// "sm" is the original card size (before the enlarge-the-logos request);
-// "lg" is the enlarged one used by default now.
-const CARD_SIZES = {
-  sm: { reveal: "h-20 w-[220px]", pad: "p-2" },
-  lg: { reveal: "h-28 w-[260px]", pad: "p-1" },
-} as const;
+const CARD_SIZE = { reveal: "h-28 w-[260px]", pad: "p-1" } as const;
 
 export default function Sponsors() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -290,7 +283,7 @@ export default function Sponsors() {
                 across every duplicate, which would otherwise stretch the
                 entrance out over many extra seconds on wide screens. */}
             {loop.map((sponsor, i) => {
-              const size = CARD_SIZES[sponsor.cardSize ?? "lg"];
+              const size = CARD_SIZE;
               return (
               <Reveal
                 key={`${sponsor.slug}-${i}`}
