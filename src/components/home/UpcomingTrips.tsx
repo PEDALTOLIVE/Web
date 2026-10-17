@@ -19,6 +19,9 @@ export default function UpcomingTrips() {
   const sectionRef = useRef<HTMLElement>(null);
   const nameRefs = useRef<Array<HTMLLIElement | null>>([]);
   const imageRefs = useRef<Array<HTMLDivElement | null>>([]);
+  // Mobile-only copy of the photos, laid out inside the white card itself
+  // (see the JSX below) — driven by the same active index.
+  const mobileImageRefs = useRef<Array<HTMLDivElement | null>>([]);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -51,6 +54,9 @@ export default function UpcomingTrips() {
 
         const imgEl = imageRefs.current[i];
         if (imgEl) imgEl.style.opacity = isActive ? "1" : "0";
+
+        const mobileImgEl = mobileImageRefs.current[i];
+        if (mobileImgEl) mobileImgEl.style.opacity = isActive ? "1" : "0";
       }
     };
 
@@ -105,6 +111,23 @@ export default function UpcomingTrips() {
             <RevealLines as="p" repeat className="text-body-m text-dark">
               Upcoming trips.
             </RevealLines>
+            {/* Mobile only: the photo now sits inside the card, between the
+                title and the list, filling all the free space there
+                (flex-1, min-h-0 so it shrinks on short screens instead of
+                pushing the list out) — much bigger than the old 96px corner
+                thumbnail, and it can never cover the title. */}
+            <div className="relative my-6 min-h-0 flex-1 overflow-hidden rounded-xl md:hidden">
+              {upcomingTrips.map((trip, i) => (
+                <div
+                  key={trip.slug}
+                  ref={(el) => {
+                    mobileImageRefs.current[i] = el;
+                  }}
+                  className="absolute inset-0 bg-cover bg-center transition-opacity duration-300"
+                  style={{ backgroundImage: `url(${trip.image})`, opacity: i === 0 ? 1 : 0 }}
+                />
+              ))}
+            </div>
             <ul className="space-y-1 sm:space-y-2">
               {upcomingTrips.map((trip, i) => (
                 <li
@@ -136,7 +159,9 @@ export default function UpcomingTrips() {
           <Reveal
             repeat
             delay={120}
-            className="absolute right-8 top-8 z-10 w-24 aspect-[4/5] overflow-hidden rounded-2xl shadow-lg md:relative md:right-auto md:top-auto md:z-auto md:aspect-auto md:min-h-[300px] md:w-[calc(50%-16px)] md:shadow-none"
+            // Desktop only now — the separate right-hand photo card. On
+            // mobile the photo lives inside the white card instead (above).
+            className="relative hidden min-h-[300px] w-[calc(50%-16px)] overflow-hidden rounded-2xl md:block"
           >
             {upcomingTrips.map((trip, i) => (
               <div
