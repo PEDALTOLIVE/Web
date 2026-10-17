@@ -563,7 +563,7 @@ export default function AboutWorld() {
                 // explicit request — the sm+ sizes already carry medium
                 // (500) weight as part of their text-body-* tokens, this
                 // was the one arbitrary size without it.
-                className="text-[18px] font-medium leading-[23px] text-secondary sm:whitespace-nowrap sm:text-body-s sm:leading-relaxed md:text-body-m lg:text-body-l xl:text-body-xl"
+                className="text-[18px] font-medium leading-[23px] text-secondary sm:whitespace-nowrap sm:text-body-s sm:leading-relaxed md:text-body-m md:leading-[1.4] lg:text-body-l xl:text-body-xl"
                 style={{ opacity: 0.4 }}
               >
                 {line}
