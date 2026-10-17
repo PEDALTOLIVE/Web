@@ -150,10 +150,10 @@ export default function Header({ variant = "dark" }: { variant?: Variant }) {
     <header
       id="site-header"
       // pointer-events-none on the full-width fixed bar itself, re-enabled
-      // only on the real controls (nav, links, buttons): the bar's empty
+      // only on the top row's real controls (see the Reveal below): the bar's empty
       // area used to sit invisibly on top of whatever was under it and
       // swallow clicks — e.g. most of the globe country card's close button.
-      className={`pointer-events-none fixed inset-x-0 top-0 z-50 transition-transform duration-300 [&_a]:pointer-events-auto [&_button]:pointer-events-auto [&_nav]:pointer-events-auto ${headerText} ${
+      className={`pointer-events-none fixed inset-x-0 top-0 z-50 transition-transform duration-300 ${headerText} ${
         scrollState === "down" ? "-translate-y-full" : "translate-y-0"
       }`}
     >
@@ -176,7 +176,7 @@ export default function Header({ variant = "dark" }: { variant?: Variant }) {
       <Reveal
         immediate
         delay={0}
-        className={`flex items-center ${
+        className={`flex items-center [&_a]:pointer-events-auto [&_button]:pointer-events-auto [&_nav]:pointer-events-auto ${
           showPill
             ? `relative mx-auto mt-3 w-fit flex-wrap justify-center gap-8 px-6 py-[18px] ${pillText}`
             : "h-[73px] justify-between px-6 md:px-8"
