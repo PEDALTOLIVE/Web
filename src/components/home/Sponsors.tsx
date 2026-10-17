@@ -24,9 +24,11 @@ const TOPO_TILE_SIZE = "1092px"; // 910px + 20% further, per explicit request
 // single entry here rather than two. Every card renders at the same size
 // (CARD_SIZE below) — a per-sponsor size briefly existed here and was
 // removed per explicit request ("todas las cards del mismo tamaño").
-const sponsors: { slug: string; name: string; logo?: string }[] = [
-  { slug: "raccholabici", name: "RACC · HolaBICI", logo: "/images/raccholabici.png" },
-  { slug: "overstims", name: "Overstim.s", logo: "/images/overstims.png" },
+// `small`: the logo IMAGE (not the card) renders at 70% of the card's
+// inner area — RACC · HolaBICI and Overstim.s read too big at full size.
+const sponsors: { slug: string; name: string; logo?: string; small?: boolean }[] = [
+  { slug: "raccholabici", name: "RACC · HolaBICI", logo: "/images/raccholabici.png", small: true },
+  { slug: "overstims", name: "Overstim.s", logo: "/images/overstims.png", small: true },
   { slug: "quetzal", name: "Quetzal", logo: "/images/quetzal.png" },
 ];
 
@@ -306,7 +308,7 @@ export default function Sponsors() {
                     <img
                       src={sponsor.logo}
                       alt={sponsor.name}
-                      className="h-full w-full object-contain"
+                      className={`${sponsor.small ? "h-[70%] w-[70%]" : "h-full w-full"} object-contain`}
                     />
                   ) : (
                     // TODO: replace with a real logo at /images/sponsors/<slug>.png once available
