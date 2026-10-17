@@ -266,9 +266,10 @@ export default function RouteKits() {
             <RevealLines as="h2" delay={0} show={moduleVisible} className="font-serif text-h1 text-dark">
               Route kits
             </RevealLines>
-            {/* Text box narrowed 20% (1008px -> 806px) per explicit
+            {/* Same size, line-height and text-box width as the Guided
+                trips intro (text-body-s, max-w-[768px]) per explicit
                 request. */}
-            <RevealLines as="h2" delay={120} show={moduleVisible} className="max-w-[806px] text-body-m">
+            <RevealLines as="p" delay={120} show={moduleVisible} className="max-w-[768px] text-body-s">
               Every kit includes the exact GPS track I rode, a short written
               guide to the country, real photos from the road, and honest
               practical tips: season, cost, safety, and how hard it really
