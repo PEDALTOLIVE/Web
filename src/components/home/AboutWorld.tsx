@@ -118,6 +118,7 @@ export default function AboutWorld() {
   const lineRefs = useRef<Array<HTMLParagraphElement | null>>([]);
   const interactiveRef = useRef(false);
   const tooltipRef = useRef<HTMLDivElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
   const globeDraggingRef = useRef(false);
   const hoveringPointRef = useRef(false);
 
@@ -399,7 +400,10 @@ export default function AboutWorld() {
     };
 
     const onMove = (e: PointerEvent) => {
-      if (!interactiveRef.current || globeDraggingRef.current || hoveringPointRef.current) {
+      // Also hidden while the pointer is over the open country card — the
+      // tooltip is about dragging the globe, not the card on top of it.
+      const overCard = cardRef.current?.contains(e.target as Node) ?? false;
+      if (!interactiveRef.current || globeDraggingRef.current || hoveringPointRef.current || overCard) {
         hide();
         return;
       }
@@ -511,7 +515,7 @@ export default function AboutWorld() {
             (stage 3), same condition that drives the desktop tooltip. */}
         <div
           className={`pointer-events-none absolute bottom-[182px] right-6 z-30 whitespace-nowrap rounded-[8px] bg-white/10 px-2.5 py-1 font-mono text-[10px] uppercase tracking-wide text-light backdrop-blur-sm transition-opacity duration-300 sm:hidden ${
-            interactive ? "opacity-100" : "opacity-0"
+            interactive && !active ? "opacity-100" : "opacity-0"
           }`}
         >
           Drag to discover
@@ -609,7 +613,12 @@ export default function AboutWorld() {
         {/* Always mounted so open/close is a fade transition rather than an
             instant mount/unmount — content comes from `displayActive`, which
             holds the last selection so it doesn't blank out mid-fade. */}
+        {/* data-lenis-prevent: the page's Lenis smooth-scroll otherwise
+            swallows wheel/touch input over the card, so its own content
+            couldn't scroll vertically. */}
         <div
+          ref={cardRef}
+          data-lenis-prevent
           className={`absolute inset-4 z-20 overflow-y-auto overscroll-contain rounded-2xl bg-light text-dark shadow-2xl transition-opacity duration-300 sm:inset-y-6 sm:inset-x-auto sm:right-8 sm:w-[420px] md:w-[460px] lg:w-[500px] ${
             active ? "opacity-100" : "pointer-events-none opacity-0"
           }`}
@@ -673,7 +682,7 @@ export default function AboutWorld() {
                 </div>
               </div>
               <div className="mx-5 mt-5 border-t border-dark/10" />
-              <p className="px-5 pb-5 pt-5 text-body-s leading-relaxed text-dark/70">
+              <p className="px-5 pb-5 pt-5 text-body-s leading-[1.4] text-dark/70">
                 {displayActive.description}
               </p>
             </>
