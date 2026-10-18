@@ -170,6 +170,10 @@ export const countries: CountryTrip[] = [
     title: "Nepal",
     description: "High-altitude tracks below the Himalayas.",
     image: "/images/countries/nepal.jpg",
+    distance: "400 km · +13,000 m",
+    duration: "7 days",
+    // 5 out of 5 stars.
+    terrain: "★★★★★",
     coords: { lat: 28.0, lon: 84.0 },
   },
 ];
