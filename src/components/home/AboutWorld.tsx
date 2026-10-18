@@ -686,7 +686,7 @@ export default function AboutWorld() {
                   third of the card and wrapped mid-value. Each " · " part
                   is also nowrap, so if the card is ever too narrow it only
                   breaks between parts, never inside "+13,000 m". */}
-              <div className="grid grid-cols-[auto_auto_auto] justify-between gap-x-4 px-5 pt-5 font-mono text-[14px] font-normal">
+              <div className="grid grid-cols-[auto_auto_auto] justify-start gap-x-8 px-5 pt-5 font-mono text-[13px] font-normal">
                 <div>
                   <p className="text-dark/50">Distance</p>
                   <p>
