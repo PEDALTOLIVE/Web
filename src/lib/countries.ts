@@ -447,7 +447,7 @@ export const guidedTrips: GuidedTrip[] = [
     priceFrom: 2600,
     maxRiders: 5,
     difficulty: 4,
-    image: placeholderImage("trip-indonesia-2", 800, 900),
+    image: "/images/trips/oman-desert-mountains.jpg",
     comingSoon: true,
     days: 12,
     gallery: [
