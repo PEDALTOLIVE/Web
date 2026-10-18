@@ -490,7 +490,7 @@ export const guidedTrips: GuidedTrip[] = [
     priceFrom: 2400,
     maxRiders: 5,
     difficulty: 5,
-    image: placeholderImage("trip-indonesia-3", 800, 900),
+    image: "/images/trips/nepal-annapurna-circuit.jpg",
     comingSoon: true,
     days: 7,
     gallery: [
