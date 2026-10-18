@@ -403,7 +403,7 @@ export const guidedTrips: GuidedTrip[] = [
     priceFrom: 2200,
     maxRiders: 5,
     difficulty: 4,
-    image: placeholderImage("trip-indonesia-1", 800, 900),
+    image: "/images/trips/indonesia-volcanoes.jpg",
     comingSoon: true,
     days: 9,
     gallery: [
