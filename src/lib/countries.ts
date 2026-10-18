@@ -168,7 +168,8 @@ export const countries: CountryTrip[] = [
     name: "Nepal",
     date: "",
     title: "Nepal",
-    description: "High-altitude tracks below the Himalayas.",
+    description:
+      "Seven days of wild MTB adventure on Nepal\u2019s legendary Annapurna Circuit, tackling rugged trails and high mountain passes beneath the Annapurnas, Dhaulagiri and other 8000s. A journey of raw landscapes, local culture, and unforgettable Himalayan panoramas.",
     image: "/images/countries/nepal.jpg",
     distance: "400 km · +13,000 m",
     duration: "7 days",
