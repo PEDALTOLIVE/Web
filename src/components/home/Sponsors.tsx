@@ -265,7 +265,7 @@ export default function Sponsors() {
           ref={maskRef}
           className="relative -mx-6 mt-8 overflow-hidden md:-mx-8"
         >
-          {/* 30s per sponsors set (was 39.2s — ~30% faster, per explicit
+          {/* 22s per sponsors set (was 39.2s, then 30s — sped up twice per explicit
               request). animationDuration scales with repeatCount so the strip's visual
               speed (px/s) stays constant regardless of how many copies a
               given screen width needed — otherwise a wider "half" would
@@ -274,7 +274,7 @@ export default function Sponsors() {
           <div
             ref={trackRef}
             className="marquee-track flex w-max items-center gap-4 hover:[animation-play-state:paused]"
-            style={{ animationDuration: `${30 * repeatCount}s` }}
+            style={{ animationDuration: `${22 * repeatCount}s` }}
           >
             {/* Same staggered fade-up-on-entrance as the product/kit cards
                 in Shop / Route kits — each card gets its own Reveal (sizing
