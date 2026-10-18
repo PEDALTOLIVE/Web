@@ -43,7 +43,19 @@ interface GlobeProps {
 type RotationState = { rotation: number; tilt: number; dragging: boolean; hovering: boolean };
 
 const RADIUS = 1;
-const START_ROTATION = (24 * Math.PI) / 180; // start slightly turned, same as before
+// The face of the globe shown before it becomes interactive (while it
+// appears and grows from small to big): Asia — Nepal / Oman / SE Asia —
+// per explicit request (it used to be whatever the ambient spin had
+// reached by then, usually the Atlantic). A marker at longitude L faces the
+// camera when rotation.y = -(90° + L) (see latLonToVector3), and a tilt of
+// T puts latitude T at the vertical centre.
+const DEG = Math.PI / 180;
+const ASIA_ROTATION = -(90 + 75) * DEG; // centred on ~75°E, between Oman and Nepal
+const ASIA_TILT = 18 * DEG;
+// While still small it sits this much further east (SE Asia) and turns
+// west onto ASIA_ROTATION as it grows — a gentle "spin in", not a jump.
+const INTRO_SPIN = 35 * DEG;
+const START_ROTATION = ASIA_ROTATION - INTRO_SPIN;
 
 // Camera distance at rest (stage 1/2) vs. fully grown (stage 3), dollied
 // smoothly between the two every frame via `zoomRef` — see the comment in
@@ -267,6 +279,8 @@ function Scene({
 }: GlobeProps & { rotationState: { current: RotationState }; wrapRef: RefObject<HTMLDivElement | null> }) {
   const groupRef = useRef<THREE.Group>(null);
   const cloudsRef = useRef<THREE.Group>(null);
+  const interactiveRef = useRef(interactive);
+  interactiveRef.current = interactive;
   const { camera } = useThree();
   const glowTexture = useGlowTexture();
 
@@ -279,8 +293,21 @@ function Scene({
   });
 
   useFrame((_, delta) => {
-    if (!rotationState.current.dragging && !rotationState.current.hovering) {
-      rotationState.current.rotation += delta * 0.045; // slow ambient auto-rotate
+    const rs = rotationState.current;
+    if (!interactiveRef.current && !rs.dragging) {
+      // Not interactive yet (appearing / growing): ease toward the Asia
+      // face, offset east by INTRO_SPIN while small and landing exactly on
+      // it at full size. Eased (not set) so switching in/out of this mode
+      // — e.g. scrolling back up from the interactive stage — never jumps.
+      const zoom = zoomRef ? zoomRef.current : 1;
+      let target = ASIA_ROTATION - (1 - zoom) * INTRO_SPIN;
+      // Same angle, nearest full turn, so it never spins the long way round.
+      target += Math.round((rs.rotation - target) / (2 * Math.PI)) * 2 * Math.PI;
+      const k = Math.min(1, delta * 6);
+      rs.rotation += (target - rs.rotation) * k;
+      rs.tilt += (ASIA_TILT - rs.tilt) * k;
+    } else if (!rs.dragging && !rs.hovering) {
+      rs.rotation += delta * 0.045; // slow ambient auto-rotate
     }
     if (groupRef.current) {
       groupRef.current.rotation.y = rotationState.current.rotation;
@@ -407,7 +434,7 @@ function ReadySignal({ onReady }: { onReady: () => void }) {
 
 export default function Globe({ interactive, onSelect, onDraggingChange, onPointHoverChange, zoomRef, active = true }: GlobeProps) {
   const wrapRef = useRef<HTMLDivElement>(null);
-  const rotationState = useRef<RotationState>({ rotation: START_ROTATION, tilt: 0, dragging: false, hovering: false });
+  const rotationState = useRef<RotationState>({ rotation: START_ROTATION, tilt: ASIA_TILT, dragging: false, hovering: false });
   const lastXRef = useRef(0);
   const lastYRef = useRef(0);
   const interactiveRef = useRef(interactive);
