@@ -186,7 +186,6 @@ function Marker({
   // lib/countries.ts) — only pull a year out when one is actually there,
   // same idea for `distance`, so the hover card below only ever shows real
   // data instead of a blank/placeholder line.
-  const year = country.date.match(/\d{4}/)?.[0];
 
   return (
     <group ref={groupRef} position={pos}>
@@ -244,10 +243,11 @@ function Marker({
             <span className="whitespace-nowrap rounded-[2px] bg-light px-[2.4px] pt-[1.2px] pb-[0.2px] font-mono text-[4.8px] font-normal uppercase text-dark">
               {country.name}
             </span>
-            {(country.distance || year) && (
+            {/* Name + distance/elevation only — the year ("in 2024") was
+                removed per explicit request, it was too much here. */}
+            {country.distance && (
               <span className="whitespace-nowrap font-mono text-[4.8px] font-normal leading-tight text-light">
-                {country.distance && <span className="block">{country.distance}</span>}
-                {year && <span className="block">in {year}</span>}
+                <span className="block">{country.distance}</span>
               </span>
             )}
           </div>
