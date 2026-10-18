@@ -441,29 +441,28 @@ export const guidedTrips: GuidedTrip[] = [
     },
   },
   {
-    slug: "indonesia-volcanoes-2",
-    title: "9 Days in Indonesia, Volcanoes & Rice Fields",
-    location: "Indonesia",
-    priceFrom: 2200,
+    slug: "oman-desert-mountains",
+    title: "12 Days in Oman, Desert & Mountains",
+    location: "Oman",
+    priceFrom: 2600,
     maxRiders: 5,
     difficulty: 4,
     image: placeholderImage("trip-indonesia-2", 800, 900),
     comingSoon: true,
-    days: 9,
+    days: 12,
     gallery: [
       placeholderImage("trip-indonesia-2-gallery-2", 800, 600),
       placeholderImage("trip-indonesia-2-gallery-3", 600, 450),
       placeholderImage("trip-indonesia-2-gallery-4", 600, 450),
     ],
     about:
-      "Nine days riding volcanoes, rice terraces and quiet fishing villages across Java and the Lesser Sundas — the exact route I rode myself before ever bringing a group. Expect early starts, big climbs, and a group small enough that nobody gets left behind. I ride alongside you the whole way and handle everything else: route-finding, logistics, and the inevitable flat tyre.",
+      "Twelve days riding desert roads, mountain passes and quiet coastal villages across Oman — the exact route I rode myself before ever bringing a group. Expect early starts, big climbs, and a group small enough that nobody gets left behind. I ride alongside you the whole way and handle everything else: route-finding, logistics, and the inevitable flat tyre.",
     included: [
       { icon: "guide", text: "Guided riding every day with Aleix or a trusted local guide" },
       { icon: "stay", text: "All accommodation, from homestays to simple hotels" },
       { icon: "meals", text: "Breakfast and dinner included throughout" },
       { icon: "mechanic", text: "Bike mechanic support and spare parts on the road" },
       { icon: "transfer", text: "Airport transfers on arrival and departure" },
-      { icon: "ferry", text: "Ferry crossings between islands" },
       { icon: "vehicle", text: "Support vehicle for luggage and rest days" },
       { icon: "route", text: "GPS tracks and a day-by-day route guide" },
       { icon: "insurance", text: "Local SIM card and travel insurance guidance" },
@@ -471,7 +470,7 @@ export const guidedTrips: GuidedTrip[] = [
     ],
     whatMakesSpecial: {
       text:
-        "This isn't a route I planned from a map — it's one I've ridden, got lost on, and ridden again until I knew exactly where the good stops are. You get the climbs everyone talks about and the ones nobody does, the best warung on the whole island, and a group small enough to actually ride together.",
+        "This isn't a route I planned from a map — it's one I've ridden, got lost on, and ridden again until I knew exactly where the good stops are. You get the climbs everyone talks about and the ones nobody does, the best roadside coffee stops in the whole country, and a group small enough to actually ride together.",
       image: placeholderImage("trip-indonesia-2-special", 1200, 750),
     },
     datesBlurb:
