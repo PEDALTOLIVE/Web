@@ -169,7 +169,7 @@ export const countries: CountryTrip[] = [
     date: "",
     title: "Nepal",
     description: "High-altitude tracks below the Himalayas.",
-    image: placeholderImage("nepal", 800, 600),
+    image: "/images/countries/nepal.jpg",
     coords: { lat: 28.0, lon: 84.0 },
   },
 ];
