@@ -680,10 +680,23 @@ export default function AboutWorld() {
                   value's own font-sans/text-body-xs override is dropped. A
                   divider below (border-t) separates this block from the
                   description text underneath. */}
-              <div className="grid grid-cols-3 gap-2 px-5 pt-5 font-mono text-[14px] font-normal">
+              {/* Columns sized to their content (auto) and spread with
+                  justify-between instead of 3 equal thirds — a long
+                  distance like "400 km · +13,000 m" was squeezed into a
+                  third of the card and wrapped mid-value. Each " · " part
+                  is also nowrap, so if the card is ever too narrow it only
+                  breaks between parts, never inside "+13,000 m". */}
+              <div className="grid grid-cols-[auto_auto_auto] justify-between gap-x-4 px-5 pt-5 font-mono text-[14px] font-normal">
                 <div>
                   <p className="text-dark/50">Distance</p>
-                  <p>{displayActive.distance ?? "Coming soon"}</p>
+                  <p>
+                    {(displayActive.distance ?? "Coming soon").split(" · ").map((part, i, parts) => (
+                      <span key={i} className="whitespace-nowrap">
+                        {part}
+                        {i < parts.length - 1 ? " · " : ""}
+                      </span>
+                    ))}
+                  </p>
                 </div>
                 <div>
                   <p className="text-dark/50">Duration</p>
