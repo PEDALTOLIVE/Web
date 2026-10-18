@@ -30,6 +30,7 @@ const sponsors: { slug: string; name: string; logo?: string; small?: boolean }[]
   { slug: "raccholabici", name: "RACC · HolaBICI", logo: "/images/raccholabici.png", small: true },
   { slug: "overstims", name: "Overstim.s", logo: "/images/overstims.png", small: true },
   { slug: "quetzal", name: "Quetzal", logo: "/images/quetzal.png" },
+  { slug: "apidura", name: "Apidura", logo: "/images/apidura.png" },
 ];
 
 const CARD_SIZE = { reveal: "h-28 w-[260px]", pad: "p-1" } as const;
@@ -264,7 +265,8 @@ export default function Sponsors() {
           ref={maskRef}
           className="relative -mx-6 mt-8 overflow-hidden md:-mx-8"
         >
-          {/* animationDuration scales with repeatCount so the strip's visual
+          {/* 30s per sponsors set (was 39.2s — ~30% faster, per explicit
+              request). animationDuration scales with repeatCount so the strip's visual
               speed (px/s) stays constant regardless of how many copies a
               given screen width needed — otherwise a wider "half" would
               cover the same -50% in the same base duration, i.e. scroll
@@ -272,7 +274,7 @@ export default function Sponsors() {
           <div
             ref={trackRef}
             className="marquee-track flex w-max items-center gap-4 hover:[animation-play-state:paused]"
-            style={{ animationDuration: `${39.2 * repeatCount}s` }}
+            style={{ animationDuration: `${30 * repeatCount}s` }}
           >
             {/* Same staggered fade-up-on-entrance as the product/kit cards
                 in Shop / Route kits — each card gets its own Reveal (sizing
