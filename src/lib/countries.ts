@@ -166,7 +166,7 @@ export const countries: CountryTrip[] = [
   {
     slug: "nepal",
     name: "Nepal",
-    date: "",
+    date: "May 2024",
     title: "Nepal",
     description:
       "Seven days of wild MTB adventure on Nepal\u2019s legendary Annapurna Circuit, tackling rugged trails and high mountain passes beneath the Annapurnas, Dhaulagiri and other 8000s. A journey of raw landscapes, local culture, and unforgettable Himalayan panoramas.",
