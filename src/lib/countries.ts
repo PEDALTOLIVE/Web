@@ -398,21 +398,21 @@ export type IncludedIconKey =
 export const guidedTrips: GuidedTrip[] = [
   {
     slug: "indonesia-volcanoes",
-    title: "9 Days in Indonesia, Volcanoes & Rice Fields",
+    title: "15 Days in Indonesia, Volcanoes & Rice Fields",
     location: "Indonesia",
-    priceFrom: 2200,
+    priceFrom: 2900,
     maxRiders: 5,
-    difficulty: 4,
+    difficulty: 3,
     image: "/images/trips/indonesia-volcanoes.jpg",
     comingSoon: true,
-    days: 9,
+    days: 15,
     gallery: [
       placeholderImage("trip-indonesia-1-gallery-2", 800, 600),
       placeholderImage("trip-indonesia-1-gallery-3", 600, 450),
       placeholderImage("trip-indonesia-1-gallery-4", 600, 450),
     ],
     about:
-      "Nine days riding volcanoes, rice terraces and quiet fishing villages across Java and the Lesser Sundas — the exact route I rode myself before ever bringing a group. Expect early starts, big climbs, and a group small enough that nobody gets left behind. I ride alongside you the whole way and handle everything else: route-finding, logistics, and the inevitable flat tyre.",
+      "Fifteen days riding volcanoes, rice terraces and quiet fishing villages across Java and the Lesser Sundas — the exact route I rode myself before ever bringing a group. Expect early starts, big climbs, and a group small enough that nobody gets left behind. I ride alongside you the whole way and handle everything else: route-finding, logistics, and the inevitable flat tyre.",
     included: [
       { icon: "guide", text: "Guided riding every day with Aleix or a trusted local guide" },
       { icon: "stay", text: "All accommodation, from homestays to simple hotels" },
