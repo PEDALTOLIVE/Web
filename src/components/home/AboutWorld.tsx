@@ -13,15 +13,23 @@ import RevealLines from "@/components/ui/RevealLines";
 // under Next.js App Router. ssr: false forces it to mount client-only.
 const Globe = dynamic(() => import("@/components/home/Globe"), { ssr: false });
 
+// One short phrase per row: on sm+ each line is `whitespace-nowrap`, so
+// keep every entry roughly this length or it will run off the screen.
 const LINES = [
-  "For nearly 12 years, my job has kept me in the air.",
-  "Off duty, I leave the plane behind",
-  "and get on two wheels.",
-  "Road, gravel, mountain, self-supported, no plan B.",
+  "As a flight attendant since 2015,",
+  "my job takes me across the skies",
+  "and around the world.",
+  "But when I\u2019m off duty, I trade wings for wheels.",
+  "Road, gravel, mountain trails",
+  "and self-supported adventures.",
+  "Exploring new places, pushing limits",
+  "and finding freedom wherever the road leads.",
   "What started as an Instagram page",
-  "has grown into Pedaltolive:",
-  "Talks, sponsors, and a community",
-  "that follows every mile.",
+  "has grown into PEDALTOLIVE \u2014",
+  "a cycling project built around adventure,",
+  "storytelling, meaningful partnerships",
+  "and a community that shares the journey,",
+  "one mile at a time.",
 ];
 
 function smoothstep(edge0: number, edge1: number, x: number) {
