@@ -104,7 +104,7 @@ export const countries: CountryTrip[] = [
     slug: "sri-lanka",
     name: "Sri Lanka",
     date: "January – February 2022",
-    title: "Sri Lanka \u2014 The Island Loop",
+    title: "Sri Lanka",
     description:
       "A cycling loop around the entire island, discovering stunning beaches, endless tea plantations, rugged mountain climbs, and impressive Hindu and Buddhist temples. All topped off with incredibly spicy food and some of the most hospitable locals in Southeast Asia.\n\nBe ready for some serious climbing in the central highlands!",
     image: placeholderImage("sri-lanka", 800, 600),
