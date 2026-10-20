@@ -105,9 +105,9 @@ export const countries: CountryTrip[] = [
     name: "Sri Lanka",
     // TODO: add the year once confirmed (e.g. "January – February 2025").
     date: "January – February",
-    title: "Sri Lanka",
+    title: "Sri Lanka \u2014 The Island Loop",
     description:
-      "A clockwise journey around the island, from the west coast to the east and south, exploring pristine beaches, endless tea plantations, rugged mountain climbs, and breathtaking Hindu and Buddhist temples. Add the spiciest food I\u2019ve ever tasted and some of the warmest, most welcoming locals in Southeast Asia.\n\nGet ready to climb: Sri Lanka\u2019s central highlands will put your legs to the test!",
+      "A cycling loop around the entire island, discovering stunning beaches, endless tea plantations, rugged mountain climbs, and impressive Hindu and Buddhist temples. All topped off with incredibly spicy food and some of the most hospitable locals in Southeast Asia.\n\nBe ready for some serious climbing in the central highlands!",
     image: placeholderImage("sri-lanka", 800, 600),
     distance: "1,100 km · +8,000 m",
     duration: "10 days",
