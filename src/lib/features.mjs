@@ -18,3 +18,9 @@ export const SHOW_KITS = true;
 
 /** News: /news and every article page. */
 export const SHOW_NEWS = true;
+
+/** Kits are listed but NOT purchasable yet: every kit card (home "Route
+ *  kits" + /shop-kits) shows greyed out with a "Coming soon" badge, no
+ *  price / CTA, not clickable, and kit product + checkout pages redirect to
+ *  /shop-kits. Set to false to open the shop. */
+export const KITS_COMING_SOON = true;

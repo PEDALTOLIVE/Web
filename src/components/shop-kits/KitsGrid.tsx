@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import Link from "next/link";
 import { kits } from "@/lib/countries";
 import Reveal from "@/components/ui/Reveal";
 import RevealLines from "@/components/ui/RevealLines";
+import { KITS_COMING_SOON } from "@/lib/features.mjs";
 
 const TOPO_IMAGE = "/images/hover-topo2.svg";
 // Pre-blurred raster of the same pattern for the spotlight's soft "halo"
@@ -232,25 +233,33 @@ export default function KitsGrid() {
                   content height (was: no explicit height, so a card with a
                   one-line title/description sat visibly shorter than one
                   next to it with more text). */}
-              <Link
-                href={`/product-page/${kit.slug}`}
-                className="group flex h-full flex-col overflow-hidden rounded-2xl bg-light p-4 shadow-sm"
-              >
+              <KitCardShell slug={kit.slug}>
                 <div className="overflow-hidden rounded-xl">
                   {/* Placeholder photo — see src/lib/countries.ts to swap for a real one */}
-                  <div
-                    className="aspect-[4/3] w-full bg-cover bg-center bg-neutral-300 transition-transform duration-500 group-hover:scale-105"
-                    style={{ backgroundImage: `url(${kit.image})` }}
-                  />
+                  <div className="relative">
+                    <div
+                      className={`aspect-[4/3] w-full bg-cover bg-center bg-neutral-300 transition-transform duration-500 group-hover:scale-105 ${KITS_COMING_SOON ? "opacity-50 grayscale" : ""}`}
+                      style={{ backgroundImage: `url(${kit.image})` }}
+                    />
+                    {KITS_COMING_SOON && (
+                      <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+                        <span className="rounded-[8px] border border-light/40 bg-dark/60 px-4 py-2 font-mono text-detail-s uppercase tracking-wide text-light backdrop-blur-sm">
+                          Coming soon
+                        </span>
+                      </div>
+                    )}
+                  </div>
                 </div>
                 {/* flex-1 so this block fills the rest of the h-full card,
                     letting the CTA row below sit flush against the bottom
                     (via mt-auto) regardless of how many lines the title or
                     description take. */}
                 <div className="mt-6 flex flex-1 flex-col gap-4">
-                  <span className="w-fit rounded-full bg-secondary px-2 py-1 font-mono text-detail-s uppercase text-dark">
-                    {kit.days} days
-                  </span>
+                  {!KITS_COMING_SOON && (
+                    <span className="w-fit rounded-full bg-secondary px-2 py-1 font-mono text-detail-s uppercase text-dark">
+                      {kit.days} days
+                    </span>
+                  )}
                   {/* min-h-[2.2em] (2 lines at this element's own leading-[1.1])
                       reserves height as if the title always wrapped to 2
                       lines — per explicit request — so a 1-line title (e.g.
@@ -259,11 +268,11 @@ export default function KitsGrid() {
                   <RevealLines
                     as="h3"
                     immediate
-                    className="min-h-[2.2em] text-[32px] font-medium tracking-[-0.02em] leading-[1.1] text-dark lg:text-h4"
+                    className={`min-h-[2.2em] text-[32px] font-medium tracking-[-0.02em] leading-[1.1] lg:text-h4 ${KITS_COMING_SOON ? "text-dark/50" : "text-dark"}`}
                   >
                     {kit.country}
                   </RevealLines>
-                  <p className="text-body-m text-dark">{kit.price}€</p>
+                  {!KITS_COMING_SOON && <p className="text-body-m text-dark">{kit.price}€</p>}
                   {/* min-h-[2.8em] leading-[1.4] — same 2-line reservation
                       idea as the title above, applied here too: without it,
                       a card whose description happens to wrap to 1 line
@@ -289,6 +298,11 @@ export default function KitsGrid() {
                       (was mt-2) pins this row to the bottom of the now-
                       flex-1 content block, so it lines up across every card
                       in a row regardless of description length. */}
+                  {KITS_COMING_SOON ? (
+                    <div className="mt-auto pt-2">
+                      <span className="font-mono text-detail-m uppercase text-dark/40">Coming soon</span>
+                    </div>
+                  ) : (
                   <div className="mt-auto flex items-center justify-between pt-2">
                     <span className="font-mono text-detail-m uppercase text-dark">
                       Get the kit
@@ -299,8 +313,9 @@ export default function KitsGrid() {
                       </svg>
                     </span>
                   </div>
+                  )}
                 </div>
-              </Link>
+              </KitCardShell>
             </Reveal>
           ))}
           {filteredKits.length === 0 && (
@@ -311,5 +326,28 @@ export default function KitsGrid() {
         </div>
       </div>
     </section>
+  );
+}
+
+// The card's outer element: a link to the kit page normally, a plain
+// non-clickable box while KITS_COMING_SOON is on.
+function KitCardShell({ slug, children }: { slug: string; children: ReactNode }) {
+  if (KITS_COMING_SOON) {
+    return (
+      <div
+        aria-disabled="true"
+        className="flex h-full cursor-default select-none flex-col overflow-hidden rounded-2xl bg-light p-4 shadow-sm"
+      >
+        {children}
+      </div>
+    );
+  }
+  return (
+    <Link
+      href={`/product-page/${slug}`}
+      className="group flex h-full flex-col overflow-hidden rounded-2xl bg-light p-4 shadow-sm"
+    >
+      {children}
+    </Link>
   );
 }

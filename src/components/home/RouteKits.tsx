@@ -6,6 +6,7 @@ import { kits } from "@/lib/countries";
 import Reveal from "@/components/ui/Reveal";
 import RevealLines from "@/components/ui/RevealLines";
 import { useSectionVisible } from "@/hooks/useSectionVisible";
+import { KITS_COMING_SOON } from "@/lib/features.mjs";
 
 const TOPO_IMAGE = "/images/hover-topo2.svg";
 // Pre-blurred raster of the same pattern for the spotlight's soft "halo"
@@ -361,10 +362,13 @@ export default function RouteKits() {
               <Reveal delay={480 + i * 120} show={moduleVisible}>
               <div className="flex flex-col gap-6 overflow-hidden rounded-2xl bg-light p-4 shadow-sm sm:h-[400px] sm:flex-row">
                 {/* Placeholder photo — see src/lib/countries.ts to swap for a real one */}
-                <div
-                  className="h-56 w-full shrink-0 rounded-xl bg-cover bg-center bg-neutral-300 sm:h-full sm:w-[280px]"
-                  style={{ backgroundImage: `url(${kit.image})` }}
-                />
+                <div className="relative h-56 w-full shrink-0 overflow-hidden rounded-xl bg-neutral-300 sm:h-full sm:w-[280px]">
+                  <div
+                    className={`absolute inset-0 bg-cover bg-center ${KITS_COMING_SOON ? "opacity-50 grayscale" : ""}`}
+                    style={{ backgroundImage: `url(${kit.image})` }}
+                  />
+                  {KITS_COMING_SOON && <ComingSoonBadge />}
+                </div>
                 {/* Rebuilt against a supplied reference mockup, per
                     explicit request — the previous version used
                     justify-between to push the title block to the top of
@@ -378,9 +382,11 @@ export default function RouteKits() {
                     price/description/CTA block below it. */}
                 <div className="flex flex-1 flex-col gap-4 sm:py-3">
                   <div className="flex flex-col gap-4">
-                    <span className="w-fit rounded-full bg-secondary px-2 py-1 font-mono text-detail-s uppercase text-dark">
-                      {kit.days} days
-                    </span>
+                    {!KITS_COMING_SOON && (
+                      <span className="w-fit rounded-full bg-secondary px-2 py-1 font-mono text-detail-s uppercase text-dark">
+                        {kit.days} days
+                      </span>
+                    )}
                     {/* Flat 36px at every breakpoint per explicit
                         request — was text-h4 (40px). Same line-height/
                         letter-spacing/weight as the h4 token (1.1 /
@@ -389,7 +395,7 @@ export default function RouteKits() {
                         at 36px/1.1 (was 88px for 40px), so every card
                         still stays the same height regardless of title
                         length. */}
-                    <h3 className="line-clamp-2 min-h-[80px] text-[36px] font-medium leading-[1.1] tracking-[-0.02em]">
+                    <h3 className={`line-clamp-2 min-h-[80px] text-[36px] font-medium leading-[1.1] tracking-[-0.02em] ${KITS_COMING_SOON ? "text-dark/50" : ""}`}>
                       {kit.country}
                     </h3>
                   </div>
@@ -398,13 +404,21 @@ export default function RouteKits() {
                       breathing room than the 16px above, matching the
                       reference. */}
                   <div className="flex flex-col gap-6">
-                    <p className="text-body-m">{kit.price}€</p>
+                    {!KITS_COMING_SOON && <p className="text-body-m">{kit.price}€</p>}
                     {/* Flat 20px (text-body-s) at every breakpoint per
                         explicit request — was 16px on mobile, up to
                         text-body-s (20px) from lg. */}
-                    <p className="text-body-s text-dark">
+                    <p className={`text-body-s ${KITS_COMING_SOON ? "text-dark/50" : "text-dark"}`}>
                       {kit.description}
                     </p>
+                    {KITS_COMING_SOON ? (
+                      <span
+                        aria-disabled="true"
+                        className="btn-primary w-fit cursor-not-allowed !bg-dark/15 !text-dark/50"
+                      >
+                        Coming soon
+                      </span>
+                    ) : (
                     <Link
                       href={`/product-page/${kit.slug}`}
                       className="btn-primary w-fit hover:bg-[#A9B89C] active:bg-[#657755]"
@@ -414,6 +428,7 @@ export default function RouteKits() {
                         <path d="M4 2l4 4-4 4" />
                       </svg>
                     </Link>
+                    )}
                   </div>
                 </div>
               </div>
@@ -423,5 +438,16 @@ export default function RouteKits() {
         </div>
       </div>
     </section>
+  );
+}
+
+// "Coming soon" badge centred over a kit photo while KITS_COMING_SOON is on.
+function ComingSoonBadge() {
+  return (
+    <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+      <span className="rounded-[8px] border border-light/40 bg-dark/60 px-4 py-2 font-mono text-detail-s uppercase tracking-wide text-light backdrop-blur-sm">
+        Coming soon
+      </span>
+    </div>
   );
 }

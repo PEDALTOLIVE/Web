@@ -355,6 +355,61 @@ export const kits: Kit[] = [
       placeholderImage("kit-colombia-4", 600, 450),
     ],
   },
+  {
+    slug: "gambia",
+    country: "The Gambia",
+    region: "Africa",
+    // TODO: real duration and price once the kit is ready (hidden while
+    // KITS_COMING_SOON is on).
+    days: 7,
+    price: 39,
+    description: "River roads, rural villages and warm West African welcomes.",
+    image: placeholderImage("kit-gambia", 800, 600),
+  },
+  {
+    slug: "sri-lanka",
+    country: "Sri Lanka",
+    region: "Asia",
+    // TODO: real duration and price once the kit is ready (hidden while
+    // KITS_COMING_SOON is on).
+    days: 10,
+    price: 39,
+    description: "A loop around the island: beaches, tea plantations and big climbs.",
+    image: placeholderImage("kit-sri-lanka", 800, 600),
+  },
+  {
+    slug: "indonesia",
+    country: "Indonesia",
+    region: "Asia",
+    // TODO: real duration and price once the kit is ready (hidden while
+    // KITS_COMING_SOON is on).
+    days: 15,
+    price: 39,
+    description: "Volcanoes, rice fields and island-hopping by bike.",
+    image: placeholderImage("kit-indonesia", 800, 600),
+  },
+  {
+    slug: "timor-leste",
+    country: "Timor-Leste",
+    region: "Asia",
+    // TODO: real duration and price once the kit is ready (hidden while
+    // KITS_COMING_SOON is on).
+    days: 10,
+    price: 39,
+    description: "Remote mountain roads on one of Asia\u2019s least-visited islands.",
+    image: placeholderImage("kit-timor-leste", 800, 600),
+  },
+  {
+    slug: "nepal",
+    country: "Nepal",
+    region: "Asia",
+    // TODO: real duration and price once the kit is ready (hidden while
+    // KITS_COMING_SOON is on).
+    days: 7,
+    price: 39,
+    description: "The Annapurna Circuit by mountain bike, over 5,400 m passes.",
+    image: placeholderImage("kit-nepal", 800, 600),
+  },
 ];
 
 export type GuidedTrip = {

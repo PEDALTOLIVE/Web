@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
+import { KITS_COMING_SOON } from "@/lib/features.mjs";
 import Header from "@/components/layout/Header";
 import Checkout from "@/components/product-page/Checkout";
 import { kits } from "@/lib/countries";
@@ -26,6 +27,8 @@ export default async function CheckoutPage({ params }: Props) {
   const { slug } = await params;
   const kit = kits.find((k) => k.slug === slug);
   if (!kit) notFound();
+  // Kits aren't purchasable yet (see KITS_COMING_SOON).
+  if (KITS_COMING_SOON) redirect("/shop-kits");
 
   return (
     <>
