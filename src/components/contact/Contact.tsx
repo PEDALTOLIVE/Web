@@ -6,6 +6,7 @@ import Reveal from "@/components/ui/Reveal";
 import RevealLines from "@/components/ui/RevealLines";
 import { placeholderImage } from "@/lib/placeholder";
 import { useSectionVisible } from "@/hooks/useSectionVisible";
+import { sendForm } from "@/lib/sendForm";
 
 const TOPO_IMAGE = "/images/hover-topo2.svg";
 // Pre-blurred raster of the same pattern for the spotlight's soft "halo"
@@ -127,6 +128,7 @@ export default function Contact() {
   const [errors, setErrors] = useState<FieldErrors>({});
   // idle → sending (brief, simulated — there's no backend yet) → sent.
   const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
+  const [submitError, setSubmitError] = useState(false);
 
   const update = <K extends keyof FormState>(key: K, value: FormState[K]) => {
     setForm((f) => ({ ...f, [key]: value }));
@@ -154,9 +156,19 @@ export default function Contact() {
     if (Object.keys(nextErrors).length > 0) return;
 
     setStatus("sending");
-    // Simulated round trip — swap for a real submit call once there's an
-    // endpoint; the button's Send → Sending → Sent sequence stays the same.
-    window.setTimeout(() => setStatus("sent"), 700);
+    setSubmitError(false);
+    // Real delivery to Aleix's inbox (see lib/sendForm.ts).
+    sendForm("New message from pedaltolive.com", {
+      Name: `${form.name} ${form.surname}`.trim(),
+      Email: form.email,
+      Message: form.comment || "(no message)",
+    }).then((ok) => {
+      if (ok) setStatus("sent");
+      else {
+        setStatus("idle");
+        setSubmitError(true);
+      }
+    });
   };
 
   // Shared input/textarea styling: light default, a slightly filled
@@ -371,6 +383,12 @@ export default function Contact() {
                   "Send"
                 )}
               </button>
+              {submitError && (
+                <p role="alert" className="text-body-xs text-primary">
+                  Sorry, your message couldn&rsquo;t be sent. Please try again, or email{" "}
+                  <a href="mailto:pedaltolive.ceo@gmail.com" className="underline">pedaltolive.ceo@gmail.com</a>.
+                </p>
+              )}
             </form>
           </Reveal>
 

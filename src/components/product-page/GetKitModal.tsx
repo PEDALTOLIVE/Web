@@ -2,6 +2,7 @@
 
 import { useEffect, useState, type FormEvent } from "react";
 import RevealLines from "@/components/ui/RevealLines";
+import { sendForm } from "@/lib/sendForm";
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -43,6 +44,7 @@ export default function GetKitModal({
   const [form, setForm] = useState<FormState>(initialForm);
   const [errors, setErrors] = useState<FieldErrors>({});
   const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
+  const [submitError, setSubmitError] = useState(false);
 
   // Reset to a blank form a beat after the close animation/unmount, so a
   // reopened modal never flashes the previous submission's state.
@@ -94,7 +96,20 @@ export default function GetKitModal({
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length > 0) return;
     setStatus("sending");
-    window.setTimeout(() => setStatus("sent"), 700);
+    setSubmitError(false);
+    // Real delivery to Aleix's inbox (see lib/sendForm.ts).
+    sendForm(`Kit request: ${country}`, {
+      Kit: country,
+      Name: `${form.name} ${form.surname}`.trim(),
+      Email: form.email,
+      Message: form.comment || "(no message)",
+    }).then((ok) => {
+      if (ok) setStatus("sent");
+      else {
+        setStatus("idle");
+        setSubmitError(true);
+      }
+    });
   };
 
   const fieldClass = (hasError?: string) =>
@@ -242,6 +257,12 @@ export default function GetKitModal({
               >
                 {status === "sending" ? "Sending…" : "Send"}
               </button>
+              {submitError && (
+                <p role="alert" className="text-body-xs text-primary">
+                  Sorry, your message couldn&rsquo;t be sent. Please try again, or email{" "}
+                  <a href="mailto:pedaltolive.ceo@gmail.com" className="underline">pedaltolive.ceo@gmail.com</a>.
+                </p>
+              )}
             </form>
           </>
         )}
