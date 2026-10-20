@@ -499,9 +499,9 @@ export const guidedTrips: GuidedTrip[] = [
     comingSoon: true,
     days: 7,
     gallery: [
-      placeholderImage("trip-indonesia-3-gallery-2", 800, 600),
-      placeholderImage("trip-indonesia-3-gallery-3", 600, 450),
-      placeholderImage("trip-indonesia-3-gallery-4", 600, 450),
+      "/images/trips/nepal-gallery-1.jpg",
+      "/images/trips/nepal-gallery-2.jpg",
+      "/images/trips/nepal-gallery-3.jpg",
     ],
     about:
       "Seven days of wild MTB adventure on Nepal\u2019s legendary Annapurna Circuit, over rugged trails and high mountain passes beneath the Annapurnas, Dhaulagiri and other 8000s — the exact route I rode myself before ever bringing a group. Expect early starts, big climbs, and a group small enough that nobody gets left behind. I ride alongside you the whole way and handle everything else: route-finding, logistics, and the inevitable flat tyre.",
