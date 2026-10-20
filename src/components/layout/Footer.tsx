@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { placeholderImage } from "@/lib/placeholder";
 import Reveal from "@/components/ui/Reveal";
 import RevealLines from "@/components/ui/RevealLines";
 
@@ -100,13 +99,13 @@ export default function Footer() {
           revealed ? "scale-y-0" : "scale-y-100"
         }`}
       />
-      {/* Placeholder photo — replace with public/images/footer-bg.jpg.
-          Extends 15% beyond the footer's own top/bottom edges to give the
+      {/* Real photo (Thailand forest switchbacks), pre-cropped tighter
+          around the rider so he reads at footer size. Extends 15% beyond the footer's own top/bottom edges to give the
           parallax translate above room to move without exposing a gap. */}
       <div
         ref={bgRef}
         className="absolute inset-x-0 -top-[15%] -bottom-[15%] bg-cover bg-center opacity-40"
-        style={{ backgroundImage: `url(${placeholderImage("pedaltolive-footer", 1600, 1000)})` }}
+        style={{ backgroundImage: "url(/images/footer-bg.jpg)" }}
       />
       <div className="absolute inset-0 bg-gradient-to-t from-dark via-dark/60 to-dark/20" />
 
