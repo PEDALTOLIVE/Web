@@ -441,7 +441,7 @@ export const guidedTrips: GuidedTrip[] = [
       name: "Aleix Mayor",
       role: "Founder & lead guide",
       bio:
-        "Cabin crew for almost 12 years and a long-distance cyclist for longer — I've ridden every guided trip route myself before ever bringing a group along, so when I say I know the road, I mean it.",
+        "In 2015 I started my career as a flight attendant. But when I\u2019m not flying, you\u2019ll most likely find me on a bike, exploring new places and riding long distances. I\u2019ve personally ridden every route before guiding a group, combining years of cycling experience with a passion for sharing the adventure.",
       avatar: "/images/team-aleix.jpg",
     },
   },
@@ -484,7 +484,7 @@ export const guidedTrips: GuidedTrip[] = [
       name: "Aleix Mayor",
       role: "Founder & lead guide",
       bio:
-        "Cabin crew for almost 12 years and a long-distance cyclist for longer — I've ridden every guided trip route myself before ever bringing a group along, so when I say I know the road, I mean it.",
+        "In 2015 I started my career as a flight attendant. But when I\u2019m not flying, you\u2019ll most likely find me on a bike, exploring new places and riding long distances. I\u2019ve personally ridden every route before guiding a group, combining years of cycling experience with a passion for sharing the adventure.",
       avatar: "/images/team-aleix.jpg",
     },
   },
@@ -527,7 +527,7 @@ export const guidedTrips: GuidedTrip[] = [
       name: "Aleix Mayor",
       role: "Founder & lead guide",
       bio:
-        "Cabin crew for almost 12 years and a long-distance cyclist for longer — I've ridden every guided trip route myself before ever bringing a group along, so when I say I know the road, I mean it.",
+        "In 2015 I started my career as a flight attendant. But when I\u2019m not flying, you\u2019ll most likely find me on a bike, exploring new places and riding long distances. I\u2019ve personally ridden every route before guiding a group, combining years of cycling experience with a passion for sharing the adventure.",
       avatar: "/images/team-aleix.jpg",
     },
   },
@@ -571,7 +571,7 @@ export const guidedTrips: GuidedTrip[] = [
       name: "Aleix Mayor",
       role: "Founder & lead guide",
       bio:
-        "Cabin crew for almost 12 years and a long-distance cyclist for longer — I've ridden every guided trip route myself before ever bringing a group along, so when I say I know the road, I mean it.",
+        "In 2015 I started my career as a flight attendant. But when I\u2019m not flying, you\u2019ll most likely find me on a bike, exploring new places and riding long distances. I\u2019ve personally ridden every route before guiding a group, combining years of cycling experience with a passion for sharing the adventure.",
       avatar: "/images/team-aleix.jpg",
     },
   },
@@ -615,7 +615,7 @@ export const guidedTrips: GuidedTrip[] = [
       name: "Aleix Mayor",
       role: "Founder & lead guide",
       bio:
-        "Cabin crew for almost 12 years and a long-distance cyclist for longer — I've ridden every guided trip route myself before ever bringing a group along, so when I say I know the road, I mean it.",
+        "In 2015 I started my career as a flight attendant. But when I\u2019m not flying, you\u2019ll most likely find me on a bike, exploring new places and riding long distances. I\u2019ve personally ridden every route before guiding a group, combining years of cycling experience with a passion for sharing the adventure.",
       avatar: "/images/team-aleix.jpg",
     },
   },
@@ -659,7 +659,7 @@ export const guidedTrips: GuidedTrip[] = [
       name: "Aleix Mayor",
       role: "Founder & lead guide",
       bio:
-        "Cabin crew for almost 12 years and a long-distance cyclist for longer — I've ridden every guided trip route myself before ever bringing a group along, so when I say I know the road, I mean it.",
+        "In 2015 I started my career as a flight attendant. But when I\u2019m not flying, you\u2019ll most likely find me on a bike, exploring new places and riding long distances. I\u2019ve personally ridden every route before guiding a group, combining years of cycling experience with a passion for sharing the adventure.",
       avatar: "/images/team-aleix.jpg",
     },
   },
@@ -703,7 +703,7 @@ export const guidedTrips: GuidedTrip[] = [
       name: "Aleix Mayor",
       role: "Founder & lead guide",
       bio:
-        "Cabin crew for almost 12 years and a long-distance cyclist for longer — I've ridden every guided trip route myself before ever bringing a group along, so when I say I know the road, I mean it.",
+        "In 2015 I started my career as a flight attendant. But when I\u2019m not flying, you\u2019ll most likely find me on a bike, exploring new places and riding long distances. I\u2019ve personally ridden every route before guiding a group, combining years of cycling experience with a passion for sharing the adventure.",
       avatar: "/images/team-aleix.jpg",
     },
   },
@@ -747,7 +747,7 @@ export const guidedTrips: GuidedTrip[] = [
       name: "Aleix Mayor",
       role: "Founder & lead guide",
       bio:
-        "Cabin crew for almost 12 years and a long-distance cyclist for longer — I've ridden every guided trip route myself before ever bringing a group along, so when I say I know the road, I mean it.",
+        "In 2015 I started my career as a flight attendant. But when I\u2019m not flying, you\u2019ll most likely find me on a bike, exploring new places and riding long distances. I\u2019ve personally ridden every route before guiding a group, combining years of cycling experience with a passion for sharing the adventure.",
       avatar: "/images/team-aleix.jpg",
     },
   },
