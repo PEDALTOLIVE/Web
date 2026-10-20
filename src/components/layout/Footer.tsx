@@ -99,12 +99,13 @@ export default function Footer() {
           revealed ? "scale-y-0" : "scale-y-100"
         }`}
       />
-      {/* Real photo (Thailand forest switchbacks), pre-cropped tighter
-          around the rider so he reads at footer size. Extends 15% beyond the footer's own top/bottom edges to give the
+      {/* Real photo (forest switchbacks), full frame — the tighter crop
+          was reverted per explicit request. opacity-60 (was 40) so it reads
+          a bit lighter. Extends 15% beyond the footer's own top/bottom edges to give the
           parallax translate above room to move without exposing a gap. */}
       <div
         ref={bgRef}
-        className="absolute inset-x-0 -top-[15%] -bottom-[15%] bg-cover bg-center opacity-40"
+        className="absolute inset-x-0 -top-[15%] -bottom-[15%] bg-cover bg-center opacity-60"
         style={{ backgroundImage: "url(/images/footer-bg.jpg)" }}
       />
       <div className="absolute inset-0 bg-gradient-to-t from-dark via-dark/60 to-dark/20" />
