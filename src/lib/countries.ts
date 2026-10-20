@@ -540,7 +540,7 @@ export const guidedTrips: GuidedTrip[] = [
   },
   {
     slug: "morocco",
-    title: "Morocco",
+    title: "7 Days in Morocco",
     location: "Morocco",
     priceFrom: 2200,
     maxRiders: 5,
@@ -548,7 +548,7 @@ export const guidedTrips: GuidedTrip[] = [
     image: placeholderImage("trip-indonesia-4", 800, 900),
     comingSoon: true,
     unavailable: true,
-    days: 9,
+    days: 7,
     gallery: [
       placeholderImage("trip-indonesia-4-gallery-2", 800, 600),
       placeholderImage("trip-indonesia-4-gallery-3", 600, 450),
@@ -585,7 +585,7 @@ export const guidedTrips: GuidedTrip[] = [
   },
   {
     slug: "thailand-laos",
-    title: "Thailand & Laos",
+    title: "20 Days in Thailand & Laos",
     location: "Thailand & Laos",
     priceFrom: 2200,
     maxRiders: 5,
@@ -593,7 +593,7 @@ export const guidedTrips: GuidedTrip[] = [
     image: placeholderImage("trip-indonesia-5", 800, 900),
     comingSoon: true,
     unavailable: true,
-    days: 9,
+    days: 20,
     gallery: [
       placeholderImage("trip-indonesia-5-gallery-2", 800, 600),
       placeholderImage("trip-indonesia-5-gallery-3", 600, 450),
@@ -630,7 +630,7 @@ export const guidedTrips: GuidedTrip[] = [
   },
   {
     slug: "sao-tome-principe",
-    title: "São Tomé & Príncipe",
+    title: "9 Days in São Tomé & Príncipe",
     location: "São Tomé & Príncipe",
     priceFrom: 2200,
     maxRiders: 5,
@@ -675,7 +675,7 @@ export const guidedTrips: GuidedTrip[] = [
   },
   {
     slug: "vietnam-cambodia",
-    title: "Vietnam & Cambodia",
+    title: "21 Days in Vietnam & Cambodia",
     location: "Vietnam & Cambodia",
     priceFrom: 2200,
     maxRiders: 5,
@@ -683,7 +683,7 @@ export const guidedTrips: GuidedTrip[] = [
     image: placeholderImage("trip-indonesia-7", 800, 900),
     comingSoon: true,
     unavailable: true,
-    days: 9,
+    days: 21,
     gallery: [
       placeholderImage("trip-indonesia-7-gallery-2", 800, 600),
       placeholderImage("trip-indonesia-7-gallery-3", 600, 450),
@@ -720,7 +720,7 @@ export const guidedTrips: GuidedTrip[] = [
   },
   {
     slug: "gambia",
-    title: "The Gambia",
+    title: "7 Days in the Gambia",
     location: "The Gambia",
     priceFrom: 2200,
     maxRiders: 5,
@@ -728,7 +728,7 @@ export const guidedTrips: GuidedTrip[] = [
     image: placeholderImage("trip-indonesia-8", 800, 900),
     comingSoon: true,
     unavailable: true,
-    days: 9,
+    days: 7,
     gallery: [
       placeholderImage("trip-indonesia-8-gallery-2", 800, 600),
       placeholderImage("trip-indonesia-8-gallery-3", 600, 450),
