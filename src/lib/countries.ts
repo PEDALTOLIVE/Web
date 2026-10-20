@@ -366,6 +366,9 @@ export type GuidedTrip = {
   difficulty: number; // out of 5
   image: string;
   comingSoon?: boolean;
+  /** Not bookable yet: the card shows greyed-out with a "Coming soon"
+   *  badge, isn't clickable, and its detail page redirects to /shop-trips. */
+  unavailable?: boolean;
   /** Below here: fields for the trip's own detail page
    *  (/product-page/[slug], see components/shop-trips/Detail.tsx). */
   days?: number;
@@ -536,14 +539,15 @@ export const guidedTrips: GuidedTrip[] = [
     },
   },
   {
-    slug: "indonesia-volcanoes-4",
-    title: "9 Days in Indonesia, Volcanoes & Rice Fields",
-    location: "Indonesia",
+    slug: "morocco",
+    title: "Morocco",
+    location: "Morocco",
     priceFrom: 2200,
     maxRiders: 5,
     difficulty: 4,
     image: placeholderImage("trip-indonesia-4", 800, 900),
     comingSoon: true,
+    unavailable: true,
     days: 9,
     gallery: [
       placeholderImage("trip-indonesia-4-gallery-2", 800, 600),
@@ -580,14 +584,15 @@ export const guidedTrips: GuidedTrip[] = [
     },
   },
   {
-    slug: "indonesia-volcanoes-5",
-    title: "9 Days in Indonesia, Volcanoes & Rice Fields",
-    location: "Indonesia",
+    slug: "thailand-laos",
+    title: "Thailand & Laos",
+    location: "Thailand & Laos",
     priceFrom: 2200,
     maxRiders: 5,
     difficulty: 4,
     image: placeholderImage("trip-indonesia-5", 800, 900),
     comingSoon: true,
+    unavailable: true,
     days: 9,
     gallery: [
       placeholderImage("trip-indonesia-5-gallery-2", 800, 600),
@@ -624,14 +629,15 @@ export const guidedTrips: GuidedTrip[] = [
     },
   },
   {
-    slug: "indonesia-volcanoes-6",
-    title: "9 Days in Indonesia, Volcanoes & Rice Fields",
-    location: "Indonesia",
+    slug: "sao-tome-principe",
+    title: "São Tomé & Príncipe",
+    location: "São Tomé & Príncipe",
     priceFrom: 2200,
     maxRiders: 5,
     difficulty: 4,
     image: placeholderImage("trip-indonesia-6", 800, 900),
     comingSoon: true,
+    unavailable: true,
     days: 9,
     gallery: [
       placeholderImage("trip-indonesia-6-gallery-2", 800, 600),
@@ -668,14 +674,15 @@ export const guidedTrips: GuidedTrip[] = [
     },
   },
   {
-    slug: "indonesia-volcanoes-7",
-    title: "9 Days in Indonesia, Volcanoes & Rice Fields",
-    location: "Indonesia",
+    slug: "vietnam-cambodia",
+    title: "Vietnam & Cambodia",
+    location: "Vietnam & Cambodia",
     priceFrom: 2200,
     maxRiders: 5,
     difficulty: 4,
     image: placeholderImage("trip-indonesia-7", 800, 900),
     comingSoon: true,
+    unavailable: true,
     days: 9,
     gallery: [
       placeholderImage("trip-indonesia-7-gallery-2", 800, 600),
@@ -712,14 +719,15 @@ export const guidedTrips: GuidedTrip[] = [
     },
   },
   {
-    slug: "indonesia-volcanoes-8",
-    title: "9 Days in Indonesia, Volcanoes & Rice Fields",
-    location: "Indonesia",
+    slug: "gambia",
+    title: "The Gambia",
+    location: "The Gambia",
     priceFrom: 2200,
     maxRiders: 5,
     difficulty: 4,
     image: placeholderImage("trip-indonesia-8", 800, 900),
     comingSoon: true,
+    unavailable: true,
     days: 9,
     gallery: [
       placeholderImage("trip-indonesia-8-gallery-2", 800, 600),

@@ -57,6 +57,8 @@ export default async function ProductPage({ params }: Props) {
   const trip = guidedTrips.find((t) => t.slug === slug);
   if (trip) {
     if (!SHOW_GUIDED_TRIPS) redirect("/");
+    // Not bookable yet (shown as "Coming soon") — no detail page.
+    if (trip.unavailable) redirect("/shop-trips");
     return (
       <>
         {/* Default (dark) Header variant — this page follows the Guided

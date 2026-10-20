@@ -17,6 +17,7 @@ function ArrowIcon() {
 // may also like" (shop-trips/Detail.tsx), so all three stay in sync instead
 // of drifting from three separate copies of the same markup.
 export default function TripCard({ trip }: { trip: GuidedTrip }) {
+  if (trip.unavailable) return <ComingSoonCard trip={trip} />;
   return (
     <Link
       href={`/product-page/${trip.slug}`}
@@ -81,5 +82,41 @@ export default function TripCard({ trip }: { trip: GuidedTrip }) {
         </div>
       </div>
     </Link>
+  );
+}
+
+// Not-yet-bookable trip: same card footprint, but greyed out (desaturated,
+// dimmed photo), not a link, no price / CTA, with a "Coming soon" badge in
+// the middle of the photo.
+function ComingSoonCard({ trip }: { trip: GuidedTrip }) {
+  return (
+    <div
+      aria-disabled="true"
+      className="relative flex h-[420px] cursor-default select-none flex-col justify-between overflow-hidden rounded-2xl bg-dark p-6 text-light"
+    >
+      <div
+        className="absolute inset-0 bg-cover bg-center opacity-40 grayscale"
+        style={{ backgroundImage: `url(${trip.image})` }}
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-dark via-dark/40 to-dark/20" />
+
+      <div className="relative">
+        <RevealLines
+          as="h3"
+          immediate
+          className="w-full text-[36px] font-medium leading-[1.1] tracking-[-0.02em] text-light/60"
+        >
+          {trip.title}
+        </RevealLines>
+      </div>
+
+      <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+        <span className="rounded-[8px] border border-light/30 bg-dark/60 px-4 py-2 font-mono text-detail-s uppercase tracking-wide text-light/90 backdrop-blur-sm">
+          Coming soon
+        </span>
+      </div>
+
+      <p className="relative text-body-xs text-secondary/60">Guided by Aleix or trusted local</p>
+    </div>
   );
 }

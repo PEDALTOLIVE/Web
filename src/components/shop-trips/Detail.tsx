@@ -180,7 +180,7 @@ export default function TripDetail({ trip }: { trip: GuidedTrip }) {
   // Two other guided trips, excluding this one — same TripCard used on the
   // homepage teaser and shop-trips/TripsGrid.tsx so this reads as more of
   // the same set.
-  const related = guidedTrips.filter((t) => t.slug !== trip.slug).slice(0, 2);
+  const related = guidedTrips.filter((t) => t.slug !== trip.slug && !t.unavailable).slice(0, 2);
 
   return (
     // No overflow-hidden on this outer section: the tiled topo background
