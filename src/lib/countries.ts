@@ -110,6 +110,8 @@ export const countries: CountryTrip[] = [
     image: placeholderImage("sri-lanka", 800, 600),
     distance: "1,100 km · +8,000 m",
     duration: "10 days",
+    // 2 out of 5 stars.
+    terrain: "★★☆☆☆",
     coords: { lat: 6.9, lon: 80.8 },
   },
   {
