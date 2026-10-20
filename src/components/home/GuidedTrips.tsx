@@ -156,10 +156,11 @@ export default function GuidedTrips() {
       // already fills half the viewport, and runs over 35% of it — so this
       // module stays fully visible until Route kits is almost in place
       // (per explicit request: it dissolved too early on desktop). Mobile
-      // keeps the original timing (starts as Route kits appears, 30%).
+      // is delayed a little too: starts once Route kits fills a quarter of
+      // the screen and runs over 40% of it (was: right away, over 30%).
       const desktop = window.innerWidth >= 768;
-      const fadeStart = desktop ? 0.5 : 0;
-      const fadeLen = desktop ? 0.35 : FADE;
+      const fadeStart = desktop ? 0.5 : 0.25;
+      const fadeLen = desktop ? 0.35 : 0.4;
       const exit =
         1 - Math.min(1, Math.max(0, (vh - rect.bottom - vh * fadeStart) / (vh * fadeLen)));
       const visibility = exit;
