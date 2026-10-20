@@ -383,6 +383,20 @@ export default function Contact() {
                   "Send"
                 )}
               </button>
+              {status === "sent" && (
+                <div
+                  role="status"
+                  className="flex items-start gap-3 rounded-lg border border-[#657755]/30 bg-[#A9B89C]/20 px-4 py-3 text-body-xs text-dark"
+                >
+                  <svg viewBox="0 0 16 16" className="mt-0.5 h-4 w-4 shrink-0 text-[#657755]" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                    <path d="M3 8.5l3.5 3.5L13 5" />
+                  </svg>
+                  <p>
+                    <span className="font-semibold">Message sent successfully!</span> Thanks for getting in
+                    touch — I&rsquo;ll get back to you as soon as possible.
+                  </p>
+                </div>
+              )}
               {submitError && (
                 <p role="alert" className="text-body-xs text-primary">
                   Sorry, your message couldn&rsquo;t be sent. Please try again, or email{" "}
