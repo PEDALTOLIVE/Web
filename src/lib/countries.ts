@@ -248,7 +248,7 @@ export const kits: Kit[] = [
       { icon: "photos", text: "Real photos from the road" },
       { icon: "logistics", text: "Honest notes on visas, water, and where to sleep" },
     ],
-    image: placeholderImage("kit-vietnam-cambodia", 800, 600),
+    image: "https://images.unsplash.com/photo-1585970661791-9cec67470281?auto=format&fit=crop&w=1200&q=80",
     gallery: [
       placeholderImage("kit-vietnam-cambodia-2", 600, 450),
       placeholderImage("kit-vietnam-cambodia-3", 600, 450),
@@ -273,7 +273,7 @@ export const kits: Kit[] = [
       { icon: "photos", text: "Real photos from the road" },
       { icon: "logistics", text: "Honest notes on weather windows, river crossings, and resupply" },
     ],
-    image: placeholderImage("kit-iceland", 800, 600),
+    image: "https://images.unsplash.com/photo-1504829857797-ddff29c27927?auto=format&fit=crop&w=1200&q=80",
     gallery: [
       placeholderImage("kit-iceland-2", 600, 450),
       placeholderImage("kit-iceland-3", 600, 450),
@@ -298,7 +298,7 @@ export const kits: Kit[] = [
       { icon: "photos", text: "Real photos from the road" },
       { icon: "logistics", text: "Honest notes on water caches, heat management, and border logistics" },
     ],
-    image: placeholderImage("kit-oman", 800, 600),
+    image: "/images/trips/oman-special.jpg",
     gallery: [
       placeholderImage("kit-oman-2", 600, 450),
       placeholderImage("kit-oman-3", 600, 450),
@@ -323,7 +323,7 @@ export const kits: Kit[] = [
       { icon: "photos", text: "Real photos from the road" },
       { icon: "logistics", text: "Honest notes on passes, water, and where to sleep" },
     ],
-    image: placeholderImage("kit-morocco", 800, 600),
+    image: "https://images.unsplash.com/photo-1739464889767-b805389a5e3f?auto=format&fit=crop&w=1200&q=80",
     gallery: [
       placeholderImage("kit-morocco-2", 600, 450),
       placeholderImage("kit-morocco-3", 600, 450),
@@ -348,7 +348,7 @@ export const kits: Kit[] = [
       { icon: "photos", text: "Real photos from the road" },
       { icon: "logistics", text: "Honest notes on altitude, traffic, and safety" },
     ],
-    image: placeholderImage("kit-colombia", 800, 600),
+    image: "https://images.unsplash.com/photo-1568489711036-9c94a7d5aea6?auto=format&fit=crop&w=1200&q=80",
     gallery: [
       placeholderImage("kit-colombia-2", 600, 450),
       placeholderImage("kit-colombia-3", 600, 450),
@@ -364,7 +364,7 @@ export const kits: Kit[] = [
     days: 7,
     price: 39,
     description: "River roads, rural villages and warm West African welcomes.",
-    image: placeholderImage("kit-gambia", 800, 600),
+    image: "https://images.unsplash.com/photo-1448099940878-e0c48ea3a165?auto=format&fit=crop&w=1200&q=80",
   },
   {
     slug: "sri-lanka",
@@ -375,7 +375,7 @@ export const kits: Kit[] = [
     days: 10,
     price: 39,
     description: "A loop around the island: beaches, tea plantations and big climbs.",
-    image: placeholderImage("kit-sri-lanka", 800, 600),
+    image: "/images/countries/sri-lanka.jpg",
   },
   {
     slug: "indonesia",
@@ -386,7 +386,7 @@ export const kits: Kit[] = [
     days: 15,
     price: 39,
     description: "Volcanoes, rice fields and island-hopping by bike.",
-    image: placeholderImage("kit-indonesia", 800, 600),
+    image: "/images/trips/indonesia-volcanoes-special.jpg",
   },
   {
     slug: "timor-leste",
@@ -397,7 +397,7 @@ export const kits: Kit[] = [
     days: 10,
     price: 39,
     description: "Remote mountain roads on one of Asia\u2019s least-visited islands.",
-    image: placeholderImage("kit-timor-leste", 800, 600),
+    image: "https://images.unsplash.com/photo-1698737474049-2858da07eaff?auto=format&fit=crop&w=1200&q=80",
   },
   {
     slug: "nepal",
@@ -408,7 +408,7 @@ export const kits: Kit[] = [
     days: 7,
     price: 39,
     description: "The Annapurna Circuit by mountain bike, over 5,400 m passes.",
-    image: placeholderImage("kit-nepal", 800, 600),
+    image: "/images/trips/nepal-gallery-1.jpg",
   },
 ];
 
