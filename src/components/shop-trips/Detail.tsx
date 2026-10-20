@@ -263,8 +263,12 @@ export default function TripDetail({ trip }: { trip: GuidedTrip }) {
                     type="button"
                     onClick={() => setMainImage(src)}
                     aria-label={`View photo ${i + 2} of ${trip.location}`}
-                    className={`aspect-[4/3] overflow-hidden rounded-xl bg-cover bg-center ${
-                      i === 0 ? "col-span-2" : ""
+                    className={`overflow-hidden rounded-xl bg-cover bg-center ${
+                      i === 0
+                        ? `col-span-2 ${trip.galleryTall ? "aspect-square" : "aspect-[4/3]"}`
+                        : trip.galleryTall
+                          ? "aspect-[3/4]"
+                          : "aspect-[4/3]"
                     } ${
                       mainImage === src ? "ring-2 ring-light ring-offset-2 ring-offset-dark" : ""
                     }`}

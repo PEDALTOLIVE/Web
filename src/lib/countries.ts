@@ -372,6 +372,9 @@ export type GuidedTrip = {
   /** Extra photos for the detail page's gallery, alongside `image` (the
    *  main photo) — the first entry renders wide, the rest 2-up beside it. */
   gallery?: string[];
+  /** Taller gallery tiles (big one square, small ones portrait 3:4) for
+   *  trips whose photos are mostly vertical, so they get cropped less. */
+  galleryTall?: boolean;
   about?: string;
   /** The checklist under "What's included" — each item carries its own
    *  icon key (see INCLUDED_ICONS in shop-trips/Detail.tsx) instead of a
@@ -503,6 +506,7 @@ export const guidedTrips: GuidedTrip[] = [
       "/images/trips/nepal-gallery-2.jpg",
       "/images/trips/nepal-gallery-3.jpg",
     ],
+    galleryTall: true,
     about:
       "Seven days of wild MTB adventure on Nepal\u2019s legendary Annapurna Circuit, over rugged trails and high mountain passes beneath the Annapurnas, Dhaulagiri and other 8000s — the exact route I rode myself before ever bringing a group. Expect early starts, big climbs, and a group small enough that nobody gets left behind. I ride alongside you the whole way and handle everything else: route-finding, logistics, and the inevitable flat tyre.",
     included: [
