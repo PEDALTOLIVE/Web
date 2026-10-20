@@ -404,7 +404,7 @@ export default function RouteKits() {
                       breathing room than the 16px above, matching the
                       reference. */}
                   <div className="flex flex-col gap-6">
-                    {!KITS_COMING_SOON && <p className="text-body-m">{kit.price}€</p>}
+                    <p className="text-body-m">{kit.price}€</p>
                     {/* Flat 20px (text-body-s) at every breakpoint per
                         explicit request — was 16px on mobile, up to
                         text-body-s (20px) from lg. */}

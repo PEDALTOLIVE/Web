@@ -272,7 +272,7 @@ export default function KitsGrid() {
                   >
                     {kit.country}
                   </RevealLines>
-                  {!KITS_COMING_SOON && <p className="text-body-m text-dark">{kit.price}€</p>}
+                  <p className="text-body-m text-dark">{kit.price}€</p>
                   {/* min-h-[2.8em] leading-[1.4] — same 2-line reservation
                       idea as the title above, applied here too: without it,
                       a card whose description happens to wrap to 1 line
