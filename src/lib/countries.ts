@@ -412,9 +412,9 @@ export const guidedTrips: GuidedTrip[] = [
     comingSoon: true,
     days: 15,
     gallery: [
-      placeholderImage("trip-indonesia-1-gallery-2", 800, 600),
-      placeholderImage("trip-indonesia-1-gallery-3", 600, 450),
-      placeholderImage("trip-indonesia-1-gallery-4", 600, 450),
+      "/images/trips/indonesia-volcanoes-gallery-1.jpg",
+      "/images/trips/indonesia-volcanoes-gallery-2.jpg",
+      "/images/trips/indonesia-volcanoes-gallery-3.jpg",
     ],
     about:
       "Fifteen days riding volcanoes, rice terraces and quiet fishing villages across Java and the Lesser Sundas — the exact route I rode myself before ever bringing a group. Expect early starts, big climbs, and a group small enough that nobody gets left behind. I ride alongside you the whole way and handle everything else: route-finding, logistics, and the inevitable flat tyre.",
