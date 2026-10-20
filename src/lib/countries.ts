@@ -103,10 +103,13 @@ export const countries: CountryTrip[] = [
   {
     slug: "sri-lanka",
     name: "Sri Lanka",
-    date: "",
+    // TODO: add the year once confirmed (e.g. "January – February 2025").
+    date: "January – February",
     title: "Sri Lanka",
     description: "Tea country climbs and tropical coastline.",
     image: placeholderImage("sri-lanka", 800, 600),
+    distance: "1,100 km · +8,000 m",
+    duration: "10 days",
     coords: { lat: 6.9, lon: 80.8 },
   },
   {
