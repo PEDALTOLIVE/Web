@@ -456,9 +456,9 @@ export const guidedTrips: GuidedTrip[] = [
     comingSoon: true,
     days: 12,
     gallery: [
-      placeholderImage("trip-indonesia-2-gallery-2", 800, 600),
-      placeholderImage("trip-indonesia-2-gallery-3", 600, 450),
-      placeholderImage("trip-indonesia-2-gallery-4", 600, 450),
+      "/images/trips/oman-gallery-1.jpg",
+      "/images/trips/oman-gallery-2.jpg",
+      "/images/trips/oman-gallery-3.jpg",
     ],
     about:
       "Twelve days riding desert roads, mountain passes and quiet coastal villages across Oman — the exact route I rode myself before ever bringing a group. Expect early starts, big climbs, and a group small enough that nobody gets left behind. I ride alongside you the whole way and handle everything else: route-finding, logistics, and the inevitable flat tyre.",
