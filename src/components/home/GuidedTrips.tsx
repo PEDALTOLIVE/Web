@@ -152,7 +152,16 @@ export default function GuidedTrips() {
       const progress = Math.min(1, Math.max(0, 1 - rect.top / vh));
       el.style.setProperty("--py", `${(1 - progress) * 80}px`);
 
-      const exit = 1 - Math.min(1, Math.max(0, (vh - rect.bottom) / (vh * FADE)));
+      // Desktop (md+): the fade-out starts much later, once Route kits
+      // already fills half the viewport, and runs over 35% of it — so this
+      // module stays fully visible until Route kits is almost in place
+      // (per explicit request: it dissolved too early on desktop). Mobile
+      // keeps the original timing (starts as Route kits appears, 30%).
+      const desktop = window.innerWidth >= 768;
+      const fadeStart = desktop ? 0.5 : 0;
+      const fadeLen = desktop ? 0.35 : FADE;
+      const exit =
+        1 - Math.min(1, Math.max(0, (vh - rect.bottom - vh * fadeStart) / (vh * fadeLen)));
       const visibility = exit;
       const opacity = String(visibility);
       if (bgFadeRef.current) bgFadeRef.current.style.opacity = opacity;
