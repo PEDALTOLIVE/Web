@@ -708,7 +708,9 @@ export default function AboutWorld() {
                 </div>
               </div>
               <div className="mx-5 mt-5 border-t border-dark/10" />
-              <p className="px-5 pb-5 pt-5 text-body-s leading-[1.4] text-dark/70">
+              {/* whitespace-pre-line: a blank line ("\n\n") in a description
+                  renders as a real paragraph break. */}
+              <p className="whitespace-pre-line px-5 pb-5 pt-5 text-body-s leading-[1.4] text-dark/70">
                 {displayActive.description}
               </p>
             </>

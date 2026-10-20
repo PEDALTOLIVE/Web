@@ -106,7 +106,8 @@ export const countries: CountryTrip[] = [
     // TODO: add the year once confirmed (e.g. "January – February 2025").
     date: "January – February",
     title: "Sri Lanka",
-    description: "Tea country climbs and tropical coastline.",
+    description:
+      "A clockwise journey around the entire island, from the west coast to the east and down to the south, discovering Sri Lanka\u2019s wildest corners along the way. From pristine beaches and endless tea plantations to rugged mountain climbs, spectacular Hindu and Buddhist temples, and some of the spiciest food I\u2019ve ever tasted. All of it made unforgettable by the warmth and hospitality of the locals, among the kindest people I\u2019ve encountered in Southeast Asia.\n\nBe ready to climb. The island\u2019s central highlands will test your legs with some serious elevation gain, but the rewards are worth every pedal stroke.",
     image: placeholderImage("sri-lanka", 800, 600),
     distance: "1,100 km · +8,000 m",
     duration: "10 days",
