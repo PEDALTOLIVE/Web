@@ -433,7 +433,7 @@ export const guidedTrips: GuidedTrip[] = [
     whatMakesSpecial: {
       text:
         "This isn't a route I planned from a map — it's one I've ridden, got lost on, and ridden again until I knew exactly where the good stops are. You get the climbs everyone talks about and the ones nobody does, the best warung on the whole island, and a group small enough to actually ride together.",
-      image: placeholderImage("trip-indonesia-1-special", 1200, 750),
+      image: "/images/trips/indonesia-volcanoes-special.jpg",
     },
     datesBlurb:
       "Let's plan it together. We'll adapt the dates to your schedule and find the best time for your trip.",
