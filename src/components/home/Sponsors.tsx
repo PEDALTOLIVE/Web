@@ -31,6 +31,7 @@ const sponsors: { slug: string; name: string; logo?: string; small?: boolean }[]
   { slug: "overstims", name: "Overstim.s", logo: "/images/overstims.png", small: true },
   { slug: "quetzal", name: "Quetzal", logo: "/images/quetzal.png" },
   { slug: "apidura", name: "Apidura", logo: "/images/apidura.png" },
+  { slug: "jameskirby", name: "James Kirby Music", logo: "/images/jameskirby.png" },
 ];
 
 const CARD_SIZE = { reveal: "h-28 w-[260px]", pad: "p-1" } as const;
