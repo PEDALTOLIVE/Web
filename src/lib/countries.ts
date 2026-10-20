@@ -442,7 +442,7 @@ export const guidedTrips: GuidedTrip[] = [
       role: "Founder & lead guide",
       bio:
         "Cabin crew for almost 12 years and a long-distance cyclist for longer — I've ridden every guided trip route myself before ever bringing a group along, so when I say I know the road, I mean it.",
-      avatar: placeholderImage("team-aleix", 400, 400),
+      avatar: "/images/team-aleix.jpg",
     },
   },
   {
@@ -485,7 +485,7 @@ export const guidedTrips: GuidedTrip[] = [
       role: "Founder & lead guide",
       bio:
         "Cabin crew for almost 12 years and a long-distance cyclist for longer — I've ridden every guided trip route myself before ever bringing a group along, so when I say I know the road, I mean it.",
-      avatar: placeholderImage("team-aleix", 400, 400),
+      avatar: "/images/team-aleix.jpg",
     },
   },
   {
@@ -528,7 +528,7 @@ export const guidedTrips: GuidedTrip[] = [
       role: "Founder & lead guide",
       bio:
         "Cabin crew for almost 12 years and a long-distance cyclist for longer — I've ridden every guided trip route myself before ever bringing a group along, so when I say I know the road, I mean it.",
-      avatar: placeholderImage("team-aleix", 400, 400),
+      avatar: "/images/team-aleix.jpg",
     },
   },
   {
@@ -572,7 +572,7 @@ export const guidedTrips: GuidedTrip[] = [
       role: "Founder & lead guide",
       bio:
         "Cabin crew for almost 12 years and a long-distance cyclist for longer — I've ridden every guided trip route myself before ever bringing a group along, so when I say I know the road, I mean it.",
-      avatar: placeholderImage("team-aleix", 400, 400),
+      avatar: "/images/team-aleix.jpg",
     },
   },
   {
@@ -616,7 +616,7 @@ export const guidedTrips: GuidedTrip[] = [
       role: "Founder & lead guide",
       bio:
         "Cabin crew for almost 12 years and a long-distance cyclist for longer — I've ridden every guided trip route myself before ever bringing a group along, so when I say I know the road, I mean it.",
-      avatar: placeholderImage("team-aleix", 400, 400),
+      avatar: "/images/team-aleix.jpg",
     },
   },
   {
@@ -660,7 +660,7 @@ export const guidedTrips: GuidedTrip[] = [
       role: "Founder & lead guide",
       bio:
         "Cabin crew for almost 12 years and a long-distance cyclist for longer — I've ridden every guided trip route myself before ever bringing a group along, so when I say I know the road, I mean it.",
-      avatar: placeholderImage("team-aleix", 400, 400),
+      avatar: "/images/team-aleix.jpg",
     },
   },
   {
@@ -704,7 +704,7 @@ export const guidedTrips: GuidedTrip[] = [
       role: "Founder & lead guide",
       bio:
         "Cabin crew for almost 12 years and a long-distance cyclist for longer — I've ridden every guided trip route myself before ever bringing a group along, so when I say I know the road, I mean it.",
-      avatar: placeholderImage("team-aleix", 400, 400),
+      avatar: "/images/team-aleix.jpg",
     },
   },
   {
@@ -748,7 +748,7 @@ export const guidedTrips: GuidedTrip[] = [
       role: "Founder & lead guide",
       bio:
         "Cabin crew for almost 12 years and a long-distance cyclist for longer — I've ridden every guided trip route myself before ever bringing a group along, so when I say I know the road, I mean it.",
-      avatar: placeholderImage("team-aleix", 400, 400),
+      avatar: "/images/team-aleix.jpg",
     },
   },
 ];
