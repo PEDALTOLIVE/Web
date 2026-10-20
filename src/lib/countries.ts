@@ -107,7 +107,7 @@ export const countries: CountryTrip[] = [
     title: "Sri Lanka",
     description:
       "A cycling loop around the entire island, discovering stunning beaches, endless tea plantations, rugged mountain climbs, and impressive Hindu and Buddhist temples. All topped off with incredibly spicy food and some of the most hospitable locals in Southeast Asia.\n\nBe ready for some serious climbing in the central highlands!",
-    image: placeholderImage("sri-lanka", 800, 600),
+    image: "/images/countries/sri-lanka.jpg",
     distance: "1,100 km · +8,000 m",
     duration: "10 days",
     // 2 out of 5 stars.
