@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import Reveal from "@/components/ui/Reveal";
 import RevealLines from "@/components/ui/RevealLines";
-import { placeholderImage } from "@/lib/placeholder";
 import { useSectionVisible } from "@/hooks/useSectionVisible";
 import { sendForm } from "@/lib/sendForm";
 
@@ -414,8 +413,8 @@ export default function Contact() {
               shorter or taller than it, per explicit request. */}
           <Reveal immediate delay={360} className="lg:h-full">
             <div
-              className="aspect-square w-full rounded-2xl bg-cover bg-center sm:aspect-[3/4] lg:aspect-auto lg:h-full"
-              style={{ backgroundImage: `url(${placeholderImage("contact-hero", 900, 1100)})` }}
+              className="aspect-square w-full rounded-2xl bg-cover bg-[center_18%] sm:aspect-[3/4] lg:aspect-auto lg:h-full"
+              style={{ backgroundImage: "url(/images/contact-aleix.jpg)" }}
             />
           </Reveal>
         </div>
