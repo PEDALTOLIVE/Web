@@ -6,6 +6,8 @@ export type CountryTrip = {
   date: string;
   title: string;
   description: string;
+  /** Short extra line under the name in the globe hover label (e.g. "Info very soon"). */
+  hoverNote?: string;
   distance?: string;
   duration?: string;
   terrain?: string;
@@ -126,6 +128,7 @@ export const countries: CountryTrip[] = [
   {
     slug: "thailand",
     name: "Thailand",
+    hoverNote: "Info very soon",
     date: "",
     title: "Thailand",
     description: "Jungle roads and street food fuel.",

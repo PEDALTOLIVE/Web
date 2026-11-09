@@ -257,9 +257,10 @@ function Marker({
             </span>
             {/* Name + distance/elevation only — the year ("in 2024") was
                 removed per explicit request, it was too much here. */}
-            {country.distance && (
+            {(country.distance || country.hoverNote) && (
               <span className="whitespace-nowrap font-mono text-[4.8px] font-normal leading-tight text-light">
-                <span className="block">{country.distance}</span>
+                {country.distance && <span className="block">{country.distance}</span>}
+                {country.hoverNote && <span className="block">{country.hoverNote}</span>}
               </span>
             )}
           </div>
