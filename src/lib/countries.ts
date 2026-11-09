@@ -128,7 +128,6 @@ export const countries: CountryTrip[] = [
   {
     slug: "thailand",
     name: "Thailand",
-    hoverNote: "Info very soon",
     date: "",
     title: "Thailand",
     description: "Jungle roads and street food fuel.",
